@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Author Portfolio</title>
+    <title>Colin Bamforth | Author Portfolio</title>
     <style>
         /* --- DESIGN SYSTEM & COLORS --- */
         :root {
-            --bg-color: #f7f6f3;
             --text-main: #2b3639;
-            --text-muted: #657577;
+            --text-muted: #5a696c;
             --accent: #4a7c59; /* Sage Green */
             --accent-light: #eef5f0;
-            --card-bg: rgba(255, 255, 255, 0.88);
-            --shadow: 0 15px 35px rgba(43, 54, 57, 0.05);
+            --card-bg: rgba(255, 255, 255, 0.92); /* Slightly higher opacity for perfect readability */
+            --shadow: 0 15px 35px rgba(43, 54, 57, 0.06);
         }
 
         * {
@@ -23,24 +22,19 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
+        /* --- WRITING THEMED BACKGROUND WITH LIGHT OVERLAY --- */
         body {
-            background-color: var(--bg-color);
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-        }
-
-        /* --- INTERACTIVE CANVAS BACKGROUND --- */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            /* We want the mouse events to pass through the background to track it */
-            pointer-events: none; 
+            /* High-quality, light literary aesthetic image */
+            background-image: linear-gradient(rgba(247, 246, 243, 0.92), rgba(247, 246, 243, 0.92)), 
+                              url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
         /* --- ASYMMETRICAL WRAPPER GRID --- */
@@ -116,12 +110,12 @@
         /* --- CONTENT CARDS --- */
         .content-card {
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 20px;
             padding: 40px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         h2 {
@@ -156,10 +150,10 @@
             grid-template-columns: 160px 1fr;
             gap: 30px;
             align-items: start;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.5);
             padding: 25px;
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.6);
             transition: transform 0.2s ease;
         }
 
@@ -271,7 +265,7 @@
         /* --- INLINE NEWSLETTER BOX --- */
         .newsletter-box {
             margin-top: auto;
-            background: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.7);
             border: 1px solid rgba(74, 124, 89, 0.15);
             padding: 20px;
             border-radius: 16px;
@@ -360,22 +354,17 @@
 </head>
 <body>
 
-    <!-- Dynamic Interactive Canvas Background -->
-    <canvas id="bg-canvas"></canvas>
-
     <div class="wrapper">
         
-        <!-- FIXED LEFT COLUMN PANEL -->
         <aside class="left-panel">
             <div class="profile-section">
                 <div class="profile-frame">
                     <svg class="profile-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 </div>
-                <h1>Your Name</h1>
+                <h1>Colin Bamforth</h1>
                 <p class="tagline">Author Portfolio & Library</p>
             </div>
 
-            <!-- Integrated Side Mailing List Block -->
             <div class="newsletter-box">
                 <p>Subscribe for exclusive early-access updates and project releases.</p>
                 <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
@@ -387,10 +376,8 @@
             </div>
         </aside>
 
-        <!-- SCROLLABLE RIGHT COLUMN STREAM -->
         <main class="right-stream">
             
-            <!-- Biography Card -->
             <section class="content-card">
                 <h2>About Me</h2>
                 <p style="font-size: 0.98rem; color: var(--text-main);">
@@ -398,12 +385,10 @@
                 </p>
             </section>
 
-            <!-- Book Library Showcase Card -->
             <section class="content-card">
                 <h2>Books & Publications</h2>
                 <div class="book-list">
                     
-                    <!-- Asymmetrical Horizontal Book Row 1 -->
                     <div class="book-row">
                         <div class="book-cover-art">BOOK ONE</div>
                         <div class="book-details">
@@ -428,7 +413,6 @@
                         </div>
                     </div>
 
-                    <!-- Asymmetrical Horizontal Book Row 2 -->
                     <div class="book-row">
                         <div class="book-cover-art" style="background: linear-gradient(135deg, #b0c4de, #4682b4);">BOOK TWO</div>
                         <div class="book-details">
@@ -457,7 +441,7 @@
             </section>
 
             <footer>
-                <p>&copy; 2026 Your Name. Powered by Cloudflare Pages.</p>
+                <p>&copy; 2026 Colin Bamforth. Powered by Cloudflare Pages.</p>
             </footer>
         </main>
 
@@ -465,163 +449,7 @@
 
     <script>
         /* ==========================================================
-           1. FOUNTAIN PEN NIB & CHASING INK PARTICLES BACKGROUND
-        ========================================================== */
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        let mouse = { x: width / 2, y: height / 2, active: false };
-        let penTarget = { x: width / 2, y: height / 2, angle: 0 };
-        
-        // Array holding our ink particles
-        const particles = [];
-        const maxParticles = 45;
-
-        // Populate a few initial drifting dots that will start on screen
-        for(let i = 0; i < 20; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                vx: (Math.random() - 0.5) * 0.5,
-                vy: (Math.random() - 0.5) * 0.5,
-                radius: Math.random() * 2.5 + 1.5,
-                opacity: Math.random() * 0.3 + 0.1
-            });
-        }
-
-        window.addEventListener('resize', () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        // Use the whole document window viewport to catch coordinates
-        window.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-            mouse.active = true;
-
-            // Generate an active trailing particle directly behind the pen movement path
-            if (Math.random() < 0.4) {
-                particles.push({
-                    x: penTarget.x,
-                    y: penTarget.y,
-                    vx: (Math.random() - 0.5) * 1,
-                    vy: (Math.random() - 0.5) * 1,
-                    radius: Math.random() * 3 + 2,
-                    opacity: 0.6
-                });
-            }
-        });
-
-        // Function that renders a beautiful geometric vector Fountain Pen Nib tip
-        function drawPenNib(x, y, angle) {
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.rotate(angle + Math.PI / 4); // Align the tip naturally with movement vector
-
-            // Draw the metallic outer structure of the nib
-            ctx.beginPath();
-            ctx.moveTo(0, 0); // The tip
-            ctx.lineTo(-10, -18);
-            ctx.lineTo(-7, -35);
-            ctx.lineTo(7, -35);
-            ctx.lineTo(10, -18);
-            ctx.closePath();
-            ctx.fillStyle = 'rgba(74, 124, 89, 0.18)'; // Soft transparent green-gold tone
-            ctx.fill();
-            ctx.strokeStyle = 'rgba(74, 124, 89, 0.35)';
-            ctx.lineWidth = 1.5;
-            ctx.stroke();
-
-            // Draw the classic fountain breather-hole & feeding ink slit lines
-            ctx.beginPath();
-            ctx.arc(0, -22, 2, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(74, 124, 89, 0.4)';
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(0, -20);
-            ctx.strokeStyle = 'rgba(74, 124, 89, 0.4)';
-            ctx.lineWidth = 1;
-            ctx.stroke();
-
-            ctx.restore();
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-
-            // 1. Interpolate pen target tracking to lag organically behind mouse coordinates
-            let dx = mouse.x - penTarget.x;
-            let dy = mouse.y - penTarget.y;
-            
-            // Calculate rotational path angles matching navigation trajectory
-            if(Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
-                penTarget.angle = Math.atan2(dy, dx);
-            }
-            
-            penTarget.x += dx * 0.08;
-            penTarget.y += dy * 0.08;
-
-            // 2. Loop, process, and adjust ink particle actions
-            for (let i = particles.length - 1; i >= 0; i--) {
-                let p = particles[i];
-
-                // If the mouse is active, inject gravity forces drawing dots toward the pen nib
-                if (mouse.active) {
-                    let pDx = penTarget.x - p.x;
-                    let pDy = penTarget.y - p.y;
-                    let distance = Math.sqrt(pDx * pDx + pDy * pDy);
-
-                    // Pull closer elements faster, create an absolute organic cluster effect
-                    if (distance < 350) {
-                        p.vx += (pDx / distance) * 0.08;
-                        p.vy += (pDy / distance) * 0.08;
-                    }
-                }
-
-                // Apply velocities, dampings, and air resistance frictions
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vx *= 0.94;
-                p.vy *= 0.94;
-
-                // Slowly fade natural trailing particles down
-                p.opacity -= 0.002;
-
-                // Render out individual ink dot nodes safely
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(74, 124, 89, ${p.opacity})`;
-                ctx.fill();
-
-                // Delete burned/invisible items to prevent memory leaks
-                if (p.opacity <= 0 || p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
-                    particles.splice(i, 1);
-                }
-            }
-
-            // Keep array size capped to run perfectly on light mobile devices
-            if (particles.length > maxParticles) {
-                particles.shift();
-            }
-
-            // 3. Render the Pen Nib drawing anchor right on top
-            if(mouse.active) {
-                drawPenNib(penTarget.x, penTarget.y, penTarget.angle);
-            }
-
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-
-        /* ==========================================================
-           2. AUTOMATIC GEOLOCATION ENGINE FOR MAIN BUTTONS
+           AUTOMATIC GEOLOCATION ENGINE FOR MAIN BUTTONS
         ========================================================== */
         const regionMap = {
             'US': 'com', 'GB': 'co.uk', 'UK': 'co.uk', 'CA': 'ca', 
