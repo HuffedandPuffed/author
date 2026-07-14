@@ -60,7 +60,6 @@
             text-align: left;
         }
 
-        /* Frame housing your real uploaded profile photo */
         .profile-frame {
             width: 140px;
             height: 140px;
@@ -141,7 +140,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin: 25px 0 15px 0;
+            margin: 35px 0 15px 0;
             padding-bottom: 6px;
             border-bottom: 1px dashed rgba(74, 124, 89, 0.2);
         }
@@ -156,7 +155,7 @@
 
         .book-row {
             display: grid;
-            grid-template-columns: 150px 1fr;
+            grid-template-columns: 140px 1fr;
             gap: 25px;
             align-items: start;
             background: rgba(255, 255, 255, 0.45);
@@ -170,32 +169,19 @@
             transform: translateY(-2px);
         }
 
-        /* Custom Cover Renderers Stylized to Match Your Real Art Vibrancy */
-        .book-cover-art {
+        .book-cover-wrap {
             width: 100%;
-            height: 215px;
-            border-radius: 4px 10px 10px 4px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-align: center;
-            padding: 12px;
-            border-left: 4px solid rgba(0,0,0,0.18);
-            text-transform: uppercase;
-            letter-spacing: 0.02em;
+            box-shadow: 5px 8px 18px rgba(43, 54, 57, 0.15);
+            border-radius: 4px 12px 12px 4px;
+            overflow: hidden;
+            background: #cbd5e1;
         }
 
-        /* Thematic Color Palettes Matching Your Real Cover Artwork */
-        .cover-silence { background: linear-gradient(135deg, #1a1a1a, #2d3748); color: #cddc39; }
-        .cover-shift { background: linear-gradient(135deg, #0f2b38, #164e63); color: #fff; }
-        .cover-stress-us { background: linear-gradient(135deg, #dd6b20, #3182ce); color: #fff; }
-        .cover-stress-au { background: linear-gradient(135deg, #e53e3e, #2b6cb0); color: #fff; }
-        .cover-puzzles { background: linear-gradient(135deg, #3f51b5, #5c6bc0); color: #fff; }
+        .book-cover-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
         .book-details {
             display: flex;
@@ -215,8 +201,9 @@
             font-size: 0.88rem;
             font-style: italic;
             color: var(--accent);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 500;
+            line-height: 1.3;
         }
 
         .book-desc {
@@ -249,6 +236,14 @@
         .amazon-btn:hover {
             background-color: #131a22;
         }
+
+        .pending-btn {
+            background-color: #e2e8f0;
+            color: #64748b;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        .pending-btn:hover { background-color: #e2e8f0; }
 
         .alt-markets-inline {
             display: flex;
@@ -347,7 +342,7 @@
             .right-stream { padding: 20px; }
             .newsletter-box { margin-top: 30px; }
             .book-row { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-            .book-cover-art { width: 130px; height: 195px; margin-bottom: 12px; }
+            .book-cover-wrap { width: 130px; margin-bottom: 12px; }
             .purchase-actions { justify-content: center; }
         }
     </style>
@@ -360,7 +355,6 @@
         <aside class="left-panel">
             <div class="profile-section">
                 <div class="profile-frame">
-                    <!-- Pointing to your local repo filename image asset directly -->
                     <img src="Colin.webp" alt="Colin Bamforth Portrait">
                 </div>
                 <h1>Colin Bamforth</h1>
@@ -385,10 +379,10 @@
             <section class="content-card">
                 <h2>About Colin</h2>
                 <p style="font-size: 0.98rem; color: var(--text-main); margin-bottom: 12px;">
-                    Welcome! I'm Colin, an author driven by exploring the spaces where real-world human experience intersects with compelling structure. Drawing from deep firsthand insight into the high-stakes, fast-moving environments of emergency services, my writing navigates intense frontline realities, human resilience, and the critical systems that support personal recovery.
+                    Welcome! I'm Colin, an author driven by exploring the spaces where real-world human experience intersects with compelling structure. Drawing on nearly 40 years of paramedic experience across New Zealand, Australia, and the UK, my writing navigates intense frontline realities, human resilience, and the critical systems that support personal recovery.
                 </p>
                 <p style="font-size: 0.98rem; color: var(--text-main);">
-                    My work crosses distinct spaces—from tension-filled hospital thrillers and illuminating memoirs to science-backed stress-management frameworks designed to bring clinical strategies out into everyday life. Across all my projects, I value delivering professional, authoritative depth balanced with a friendly, welcoming, and open narrative voice. Take a look around my library shelf space below, and join the reader circle list to ensure you never miss the launch of the next volume.
+                    My work crosses distinct spaces—from tension-filled hospital thrillers and illuminating fictional biographies to science-backed stress-management frameworks designed to bring clinical strategies out into everyday life. Across all my projects, I value delivering professional, authoritative depth balanced with a friendly, welcoming, and open narrative voice. Take a look around my library shelves below, and join the mailing list so we can share the next chapter together.
                 </p>
             </section>
 
@@ -397,40 +391,35 @@
                 <h2>The Library</h2>
                 <div class="book-list">
                     
-                    <div class="shelf-title">Frontline Medical & Thriller</div>
+                    <div class="shelf-title">International Thriller & Fiction</div>
 
-                    <!-- Book 1 -->
+                    <!-- Book 1: Standard Operating Silence -->
                     <div class="book-row">
-                        <div class="book-cover-art cover-silence">Standard Operating Silence</div>
+                        <div class="book-cover-wrap">
+                            <img src="standard-operating-silence.webp" alt="Standard Operating Silence Cover">
+                        </div>
                         <div class="book-details">
                             <div>
-                                <div class="book-title">Standard Operating Silence (Book 1)</div>
+                                <div class="book-title">Standard Operating Silence</div>
                                 <div class="book-subtitle">"The truth was never meant to survive."</div>
-                                <div class="book-desc">A gripping medical thriller exploring systemic shadows, uncovering industrial vulnerabilities hidden right inside our frontline medical systems where stakes are instantly life or death.</div>
+                                <div class="book-desc">Former reconnaissance soldier, paramedic, and clinical educator Raf Rodriguez is used to trauma, chaos, and pressure. When unrelated incidents begin to overlap, altered reports and missing details point toward a conspiracy protected by procedure. A gripping thriller of emergency medicine, law enforcement, institutional self-interest, and the danger of asking the wrong questions.</div>
                             </div>
                             <div class="purchase-actions">
-                                <a href="https://www.amazon.com/dp/B01SILENCE" target="_blank" class="amazon-link amazon-btn" data-asin="B01SILENCE">Buy Locally ➔</a>
-                                <div class="alt-markets-inline">
-                                    <span class="alt-market-title">Gifting:</span>
-                                    <div class="alt-market-links">
-                                        <a href="https://www.amazon.com/dp/B01SILENCE" target="_blank">US</a>
-                                        <a href="https://www.amazon.co.uk/dp/B01SILENCE" target="_blank">UK</a>
-                                        <a href="https://www.amazon.ca/dp/B01SILENCE" target="_blank">CA</a>
-                                        <a href="https://www.amazon.com.au/dp/B01SILENCE" target="_blank">AU</a>
-                                    </div>
-                                </div>
+                                <a href="#" onclick="alert('Release pending September 2026!'); return false;" class="amazon-btn pending-btn">Pending Sept 2026</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Book 2 -->
+                    <!-- Book 2: Shift Change -->
                     <div class="book-row">
-                        <div class="book-cover-art cover-shift">Shift Change</div>
+                        <div class="book-cover-wrap">
+                            <img src="shift-change.webp" alt="Shift Change Cover">
+                        </div>
                         <div class="book-details">
                             <div>
-                                <div class="book-title">Shift Change: A Paramedic's Story</div>
-                                <div class="book-subtitle">"What survives when the sirens go silent." (Second Edition)</div>
-                                <div class="book-desc">A deeply authentic, moving exploration looking directly into the psychological and emotional landscapes of a first responder navigating modern high-intensity operations.</div>
+                                <div class="book-title">Shift Change</div>
+                                <div class="book-subtitle">A Paramedic's Story - What survives when the sirens go silent</div>
+                                <div class="book-desc">Set in the fictional city of Thamesreach and written with lived emotional realism, Shift Change follows paramedic Naomi Kerslake through the brutal, beautiful, and relentlessly human work behind the uniform. This revised second edition expands the scenes and deepens the quiet trauma, courage, burnout, and resilience that remain when the sirens go silent.</div>
                             </div>
                             <div class="purchase-actions">
                                 <a href="https://www.amazon.com/dp/B02SHIFTCH" target="_blank" class="amazon-link amazon-btn" data-asin="B02SHIFTCH">Buy Locally ➔</a>
@@ -447,16 +436,18 @@
                         </div>
                     </div>
 
-                    <div class="shelf-title">Science-Backed Wellness Guides</div>
+                    <div class="shelf-title">Self-Help & Wellness</div>
 
-                    <!-- Book 3 -->
+                    <!-- Book 3: Overwhelmed by Stress (US) -->
                     <div class="book-row">
-                        <div class="book-cover-art cover-stress-us">Overwhelmed By Stress? US</div>
+                        <div class="book-cover-wrap">
+                            <img src="overwhelmed-by-stress-us.webp" alt="Overwhelmed by Stress US Cover">
+                        </div>
                         <div class="book-details">
                             <div>
-                                <div class="book-title">Overwhelmed by Stress? (US Edition)</div>
-                                <div class="book-subtitle">A science-backed guide to reducing stress, regaining clarity, and restoring balance.</div>
-                                <div class="book-desc">A structured strategy map combining cognitive frameworks with clinical precision to help North American professionals target everyday burnout.</div>
+                                <div class="book-title">Overwhelmed by Stress?</div>
+                                <div class="book-subtitle">A science-backed guide to reducing stress, regaining clarity, and restoring balance. (US Edition)</div>
+                                <div class="book-desc">A clear, compassionate guide for readers who feel constantly on edge, overloaded, or unable to find breathing room. Drawing on nearly 40 years of paramedic experience across New Zealand, Australia, and the UK, Colin Bamforth offers practical, body-based strategies for understanding stress, recovering clarity, and carrying life's pressures differently.</div>
                             </div>
                             <div class="purchase-actions">
                                 <a href="https://www.amazon.com/dp/B03STRESSU" target="_blank" class="amazon-link amazon-btn" data-asin="B03STRESSU">Buy Locally ➔</a>
@@ -471,14 +462,16 @@
                         </div>
                     </div>
 
-                    <!-- Book 4 -->
+                    <!-- Book 4: Overwhelmed by Stress (AU/NZ) -->
                     <div class="book-row">
-                        <div class="book-cover-art cover-stress-au">Overwhelmed By Stress? AU/NZ</div>
+                        <div class="book-cover-wrap">
+                            <img src="overwhelmed-by-stress-au-nz.webp" alt="Overwhelmed by Stress AU NZ Cover">
+                        </div>
                         <div class="book-details">
                             <div>
-                                <div class="book-title">Overwhelmed by Stress? (Australia & New Zealand Edition)</div>
-                                <div class="book-subtitle">A science-backed guide to reducing stress, regaining clarity, and restoring balance.</div>
-                                <div class="book-desc">Customized strategies designed to meet unique workplace stress cultures and recovery frameworks across Australia and New Zealand.</div>
+                                <div class="book-title">Overwhelmed by Stress?</div>
+                                <div class="book-subtitle">A science-backed guide to reducing stress, regaining clarity, and restoring balance. (Australia and New Zealand Edition)</div>
+                                <div class="book-desc">A practical Australia and New Zealand edition for readers facing burnout, transition, grief, overload, or uncertainty. This is not a book of quick fixes or forced positivity, but a grounded guide to walking with stress, using small repeatable steps to restore balance, clarity, and meaning.</div>
                             </div>
                             <div class="purchase-actions">
                                 <a href="https://www.amazon.com.au/dp/B04STRESSA" target="_blank" class="amazon-link amazon-btn" data-asin="B04STRESSA">Buy Locally ➔</a>
@@ -486,7 +479,6 @@
                                     <span class="alt-market-title">Gifting:</span>
                                     <div class="alt-market-links">
                                         <a href="https://www.amazon.com.au/dp/B04STRESSA" target="_blank">AU</a>
-                                        <a href="https://www.amazon.co.nz/dp/B04STRESSA" target="_blank">NZ</a>
                                         <a href="https://www.amazon.co.uk/dp/B04STRESSA" target="_blank">UK</a>
                                     </div>
                                 </div>
@@ -494,26 +486,52 @@
                         </div>
                     </div>
 
-                    <div class="shelf-title">Brain Training & Activity Books</div>
+                    <div class="shelf-title">Brain Training & Puzzle Books</div>
 
-                    <!-- Book 5 -->
+                    <!-- Book 5: Motorcycle Word Search -->
                     <div class="book-row">
-                        <div class="book-cover-art cover-puzzles">Word Search Puzzles</div>
+                        <div class="book-cover-wrap">
+                            <img src="motorcycle-word-search.webp" alt="Motorcycle Word Search Cover">
+                        </div>
                         <div class="book-details">
                             <div>
-                                <div class="book-title">The Thematic Word Search Series</div>
-                                <div class="book-subtitle">For adults, seniors, teens, and children.</div>
-                                <div class="book-desc">A collection of cross-generational focus puzzle books exploring engaging, highly detailed theme sheets including **Construction**, **Fishing**, and **Motorcycle** topics.</div>
+                                <div class="book-title">Motorcycle Word Search</div>
+                                <div class="book-subtitle">A themed word-search collection for motorcycle enthusiasts</div>
+                                <div class="book-desc">Built for relaxed concentration and easy gifting. Perfect for riders who enjoy clear layout print sheets and active focus breaks.</div>
                             </div>
                             <div class="purchase-actions">
-                                <a href="https://www.amazon.com/dp/B05PUZZLES" target="_blank" class="amazon-link amazon-btn" data-asin="B05PUZZLES">Buy Locally ➔</a>
+                                <a href="https://www.amazon.com/dp/B05MOTO" target="_blank" class="amazon-link amazon-btn" data-asin="B05MOTO">Buy Locally ➔</a>
                                 <div class="alt-markets-inline">
                                     <span class="alt-market-title">Gifting:</span>
                                     <div class="alt-market-links">
-                                        <a href="https://www.amazon.com/dp/B05PUZZLES" target="_blank">US</a>
-                                        <a href="https://www.amazon.co.uk/dp/B05PUZZLES" target="_blank">UK</a>
-                                        <a href="https://www.amazon.ca/dp/B05PUZZLES" target="_blank">CA</a>
-                                        <a href="https://www.amazon.com.au/dp/B05PUZZLES" target="_blank">AU</a>
+                                        <a href="https://www.amazon.com/dp/B05MOTO" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B05MOTO" target="_blank">UK</a>
+                                        <a href="https://www.amazon.com.au/dp/B05MOTO" target="_blank">AU</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 6: Construction Word Search -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="construction-word-search.webp" alt="Construction Word Search Cover">
+                        </div>
+                        <div class="book-details">
+                            <div>
+                                <div class="book-title">Construction Word Search</div>
+                                <div class="book-subtitle">A construction-themed puzzle book</div>
+                                <div class="book-desc">For readers who enjoy site language, tools, trades, and a satisfying pencil-and-paper break. Excellent cross-generational layout engine design built for crisp, clear visual puzzle tracking.</div>
+                            </div>
+                            <div class="purchase-actions">
+                                <a href="https://www.amazon.com/dp/B06CONST" target="_blank" class="amazon-link amazon-btn" data-asin="B06CONST">Buy Locally ➔</a>
+                                <div class="alt-markets-inline">
+                                    <span class="alt-market-title">Gifting:</span>
+                                    <div class="alt-market-links">
+                                        <a href="https://www.amazon.com/dp/B06CONST" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B06CONST" target="_blank">UK</a>
+                                        <a href="https://www.amazon.com.au/dp/B06CONST" target="_blank">AU</a>
                                     </div>
                                 </div>
                             </div>
@@ -554,7 +572,7 @@
                     }
                 }
             } catch (error) {
-                console.log("Location engine defaulted to Amazon.com.");
+                console.log("Location engine safely defaulted to Amazon.com.");
             }
 
             const mainLinks = document.querySelectorAll('.amazon-link');
