@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Books - Author Portfolio</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --text-color: #f3f4f6;
+            --accent-color: #3b82f6;
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Dynamic Background Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Email Signup Form */
+        .signup-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 500px;
+            margin: 1.5rem auto 0;
+        }
+
+        .signup-form input[type="email"] {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .signup-form button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .signup-form button:hover {
+            background: #2563eb;
+        }
+
+        /* Books Grid */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .book-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .book-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .links-container {
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            padding: 0.6rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .btn-boundtext {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-boundtext:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-amazon {
+            background: #ff9900;
+            color: #111;
+        }
+
+        .btn-amazon:hover {
+            background: #e68a00;
+        }
+
+        @media (max-width: 600px) {
+            .signup-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <h1>My Published Works</h1>
+        <p>Explore my books on BoundText and Amazon worldwide.</p>
+    </header>
+
+    <div class="container">
+        <section class="signup-section">
+            <h2>Join My Newsletter</h2>
+            <p>Get notified about new releases, updates, and exclusive content.</p>
+            <form class="signup-form" id="newsletterForm">
+                <input type="email" id="emailInput" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <p id="formMessage" style="margin-top: 1rem; display: none;"></p>
+        </section>
+
+        <main class="books-grid" id="booksGrid">
+            </main>
+    </div>
+
+    <script>
+        // 1. LIGHTWEIGHT DYNAMIC BACKGROUND (AntiGravity Style)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedY = -(Math.random() * 0.4 + 0.1); // Upward movement
+                this.alpha = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.y += this.speedY;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.min(80, window.innerWidth / 10); // Responsive particle density
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+
+        // 2. BOOK DATA & GEOLOCATION AMAZON LINKS
+        // Replace these placeholder ASINs and URLs with your actual book details
+        const myBooks = [
+            {
+                title: "Book Title One",
+                description: "A short snippet description of your first amazing book.",
+                boundtextUrl: "https://boundtext.com/book/example-1",
+                asin: "B00XXXXXX1" 
+            },
+            {
+                title: "Book Title Two",
+                description: "A short snippet description of your second amazing book.",
+                boundtextUrl: "https://boundtext.com/book/example-2",
+                asin: "B00XXXXXX2"
+            }
+        ];
+
+        // Maps country codes to Amazon stores
+        const amazonStores = {
+            US: 'amazon.com',
+            GB: 'amazon.co.uk',
+            CA: 'amazon.ca',
+            AU: 'amazon.com.au',
+            DE: 'amazon.de',
+            FR: 'amazon.fr',
+            ES: 'amazon.es',
+            IT: 'amazon.it',
+            JP: 'amazon.co.jp',
+            IN: 'amazon.in'
+        };
+
+        async function getAmazonStoreTLD() {
+            try {
+                // Fetch user country via a free, fast geolocation API
+                const response = await fetch('https://ipapi.co/json/');
+                const data = await response.json();
+                const country = data.country_code;
+                return amazonStores[country] || 'amazon.com'; // Default to .com if country missing
+            } catch (error) {
+                console.log("Geolocation failed, defaulting to Amazon.com");
+                return 'amazon.com';
+            }
+        }
+
+        async function renderBooks() {
+            const tld = await getAmazonStoreTLD();
+            const grid = document.getElementById('booksGrid');
+            
+            grid.innerHTML = myBooks.map(book => `
+                <article class="book-card">
+                    <div>
+                        <h3 class="book-title">${book.title}</h3>
+                        <p>${book.description}</p>
+                    </div>
+                    <div class="links-container">
+                        <a href="${book.boundtextUrl}" target="_blank" class="btn btn-boundtext">Read on BoundText</a>
+                        <a href="https://${tld}/dp/${book.asin}" target="_blank" class="btn btn-amazon">Buy on Amazon (${tld})</a>
+                    </div>
+                </article>
+            `).join('');
+        }
+        renderBooks();
+
+
+        // 3. EMAIL FORM HANDLER
+        document.getElementById('newsletterForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const messageEl = document.getElementById('formMessage');
+
+            messageEl.style.display = 'block';
+            messageEl.style.color = '#3b82f6';
+            messageEl.textContent = 'Submitting...';
+
+            try {
+                // NOTE: This currently targets a placeholder endpoint. 
+                // Once you choose a email provider, replace this URL with your handling endpoint.
+                const response = await fetch('https://your-cloudflare-worker-or-endpoint.workers.dev/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+
+                if (response.ok) {
+                    messageEl.style.color = '#10b981';
+                    messageEl.textContent = 'Thank you for subscribing!';
+                    document.getElementById('emailInput').value = '';
+                } else {
+                    throw new Error();
+                }
+            } catch (err) {
+                // Form fails safely and alerts user gently
+                messageEl.style.color = '#ef4444';
+                messageEl.textContent = 'Oops! Something went wrong. Please try again later.';
+            }
+        });
+    </script>
+</body>
+</html>
