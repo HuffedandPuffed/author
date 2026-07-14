@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colin Bamforth | Author Portfolio</title>
+    <title>Colin Bamforth | Author</title>
     <style>
         /* --- DESIGN SYSTEM & COLORS --- */
         :root {
@@ -11,7 +11,7 @@
             --text-muted: #5a696c;
             --accent: #4a7c59; /* Sage Green */
             --accent-light: #eef5f0;
-            --card-bg: rgba(255, 255, 255, 0.92); /* Slightly higher opacity for perfect readability */
+            --card-bg: rgba(255, 255, 255, 0.92);
             --shadow: 0 15px 35px rgba(43, 54, 57, 0.06);
         }
 
@@ -28,7 +28,6 @@
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            /* High-quality, light literary aesthetic image */
             background-image: linear-gradient(rgba(247, 246, 243, 0.92), rgba(247, 246, 243, 0.92)), 
                               url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
@@ -62,7 +61,6 @@
             text-align: left;
         }
 
-        /* Modern Asymmetric Frame for Profile Image */
         .profile-frame {
             width: 130px;
             height: 150px;
@@ -87,16 +85,18 @@
             font-size: 2.4rem;
             color: #1c2426;
             line-height: 1.2;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             font-weight: 800;
             letter-spacing: -0.02em;
         }
 
         .tagline {
-            font-size: 1.05rem;
+            font-size: 1.2rem;
             color: var(--accent);
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 20px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
         /* --- RIGHT SCROLLABLE STREAM --- */
@@ -356,15 +356,17 @@
 
     <div class="wrapper">
         
+        <!-- FIXED LEFT COLUMN PANEL -->
         <aside class="left-panel">
             <div class="profile-section">
                 <div class="profile-frame">
                     <svg class="profile-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 </div>
                 <h1>Colin Bamforth</h1>
-                <p class="tagline">Author Portfolio & Library</p>
+                <p class="tagline">Author</p>
             </div>
 
+            <!-- Integrated Side Mailing List Block -->
             <div class="newsletter-box">
                 <p>Subscribe for exclusive early-access updates and project releases.</p>
                 <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
@@ -376,19 +378,26 @@
             </div>
         </aside>
 
+        <!-- SCROLLABLE RIGHT COLUMN STREAM -->
         <main class="right-stream">
             
+            <!-- Biography Card -->
             <section class="content-card">
                 <h2>About Me</h2>
+                <p style="font-size: 0.98rem; color: var(--text-main); margin-bottom: 12px;">
+                    Welcome! I'm Colin, and I spend my time exploring the spaces where creativity meets structure, crafting stories designed to entertain, challenge, and connect. My goal as an author is to balance professional depth with an open, friendly narrative voice—inviting you to look closely at the world through a slightly different lens.
+                </p>
                 <p style="font-size: 0.98rem; color: var(--text-main);">
-                    Hello and welcome! I am an author dedicated to crafting stories that entertain, inspire, and connect. Whether you are a longtime reader or just discovering my work, I'm absolutely thrilled to have you here. Explore my library below, and don't forget to join the newsletter for exclusive behind-the-scenes content and project updates!
+                    Whether you have followed my creative journey from the start or just happened to drop by, I’m incredibly glad to have you here. This space is built to bring global readers together effortlessly, no matter where your local bookstore happens to be. Feel free to explore the library below, look around, and join the mailing list so we can share the very next chapter together.
                 </p>
             </section>
 
+            <!-- Book Library Showcase Card -->
             <section class="content-card">
                 <h2>Books & Publications</h2>
                 <div class="book-list">
                     
+                    <!-- Asymmetrical Horizontal Book Row 1 -->
                     <div class="book-row">
                         <div class="book-cover-art">BOOK ONE</div>
                         <div class="book-details">
@@ -413,6 +422,7 @@
                         </div>
                     </div>
 
+                    <!-- Asymmetrical Horizontal Book Row 2 -->
                     <div class="book-row">
                         <div class="book-cover-art" style="background: linear-gradient(135deg, #b0c4de, #4682b4);">BOOK TWO</div>
                         <div class="book-details">
