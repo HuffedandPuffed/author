@@ -7,12 +7,13 @@
     <style>
         /* --- DESIGN SYSTEM & COLORS --- */
         :root {
-            --bg-color: #f9f8f6;
-            --text-main: #2d3748;
-            --text-muted: #718096;
-            --accent: #4a7c59; /* Friendly Sage Green */
-            --accent-light: #edf4ee;
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --bg-color: #f7f6f3;
+            --text-main: #2b3639;
+            --text-muted: #657577;
+            --accent: #4a7c59; /* Sage Green */
+            --accent-light: #eef5f0;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --shadow: 0 15px 35px rgba(43, 54, 57, 0.05);
         }
 
         * {
@@ -41,240 +42,224 @@
             pointer-events: none;
         }
 
-        /* --- LAYOUT CONTAINERS --- */
-        .container {
-            max-width: 850px;
+        /* --- ASYMMETRICAL WRAPPER GRID --- */
+        .wrapper {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            min-height: 100vh;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 40px 20px;
+            position: relative;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-            padding: 20px;
+        /* --- LEFT FIXED PANEL --- */
+        .left-panel {
+            padding: 60px 40px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* --- PROFILE PICTURE PLACEHOLDER --- */
-        .profile-wrapper {
-            width: 150px;
+        .profile-section {
+            text-align: left;
+        }
+
+        /* Modern Asymmetric Frame for Profile Image */
+        .profile-frame {
+            width: 130px;
             height: 150px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+            border-radius: 24px 4px 24px 24px; /* Asymmetric corners */
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
             border: 4px solid white;
-            position: relative;
             overflow: hidden;
         }
 
-        .profile-placeholder-icon {
-            fill: #94a3b8;
-            width: 60px;
-            height: 60px;
+        .profile-icon {
+            fill: #f1f5f9;
+            width: 55px;
+            height: 55px;
         }
 
         h1 {
-            font-size: 2.5rem;
-            color: #1a202c;
-            margin-bottom: 8px;
-            font-weight: 700;
+            font-size: 2.4rem;
+            color: #1c2426;
+            line-height: 1.2;
+            margin-bottom: 12px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.05rem;
             color: var(--accent);
             font-weight: 500;
+            margin-bottom: 20px;
         }
 
-        /* --- SECTION STYLES --- */
-        .section-card {
+        /* --- RIGHT SCROLLABLE STREAM --- */
+        .right-stream {
+            padding: 60px 60px 60px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* --- CONTENT CARDS --- */
+        .content-card {
             background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 35px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
             border: 1px solid rgba(255, 255, 255, 0.7);
         }
 
         h2 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 20px;
-            color: #1a202c;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 30px;
-            height: 3px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        /* --- NEWSLETTER FORM --- */
-        .newsletter-text {
-            color: var(--text-muted);
-            margin-bottom: 20px;
-        }
-
-        .form-group {
+            letter-spacing: -0.01em;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #1c2426;
             display: flex;
-            gap: 12px;
-        }
-
-        input[type="email"] {
-            flex: 1;
-            padding: 14px 18px;
-            border-radius: 8px;
-            border: 1px solid #cbd5e1;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.2s;
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        input[type="email"]:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.2);
-        }
-
-        button {
-            background-color: var(--accent);
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        }
-
-        button:hover {
-            background-color: #3b6347;
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        /* --- BOOK GRID DISPLAY --- */
-        .book-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-        }
-
-        .book-card {
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            text-align: center;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #edf2f7;
+            gap: 10px;
         }
 
-        /* BOOK COVER PLACEHOLDER */
-        .book-cover-placeholder {
-            width: 140px;
-            height: 210px;
-            background: linear-gradient(135deg, #a3b899, #4a7c59);
-            border-radius: 4px 8px 8px 4px;
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.15);
-            margin-bottom: 15px;
+        h2::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* --- ASYMMETRICAL BOOK STACK --- */
+        .book-list {
             display: flex;
             flex-direction: column;
+            gap: 35px;
+        }
+
+        /* Horizontal/Asymmetrical design pattern for Book rows */
+        .book-row {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 30px;
+            align-items: start;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.2s ease;
+        }
+
+        .book-row:hover {
+            transform: translateY(-2px);
+        }
+
+        .book-cover-art {
+            width: 100%;
+            height: 230px;
+            background: linear-gradient(135deg, #a3b899, #4a7c59);
+            border-radius: 4px 12px 12px 4px;
+            box-shadow: 8px 8px 20px rgba(0,0,0,0.12);
+            display: flex;
             justify-content: center;
             align-items: center;
             color: white;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
             padding: 15px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-            border-left: 4px solid rgba(0,0,0,0.2);
+            border-left: 5px solid rgba(0,0,0,0.15);
+        }
+
+        .book-details {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            justify-content: space-between;
         }
 
         .book-title {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 6px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1c2426;
+            margin-bottom: 8px;
         }
 
         .book-desc {
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
-            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+
+        /* Action elements inside the book rows */
+        .purchase-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
         }
 
         .amazon-btn {
-            display: inline-block;
-            background-color: #232f3e; /* Sleek Dark Slate */
-            color: #ffa41c; /* Amazon Gold Accent */
+            background-color: #232f3e;
+            color: #ffa41c;
             text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 6px;
-            font-size: 0.95rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
             font-weight: 600;
             transition: background 0.2s;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: inline-flex;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(35, 47, 62, 0.15);
         }
 
         .amazon-btn:hover {
             background-color: #131a22;
         }
 
-        /* --- COMPACT OTHER MARKETPLACE BOX --- */
-        .alt-markets-box {
-            margin-top: 14px;
-            width: 100%;
-            background-color: rgba(237, 244, 230, 0.4);
-            border: 1px dashed rgba(74, 124, 89, 0.3);
-            padding: 10px;
-            border-radius: 8px;
+        .alt-markets-inline {
             display: flex;
-            flex-direction: column;
-            gap: 6px;
             align-items: center;
+            gap: 6px;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
         }
 
-        .alt-market-label {
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-muted);
+        .alt-market-title {
+            font-size: 0.75rem;
             font-weight: 600;
+            color: var(--text-muted);
+            margin-right: 4px;
         }
 
         .alt-market-links {
             display: flex;
-            gap: 6px;
-            justify-content: center;
-            flex-wrap: wrap;
+            gap: 5px;
         }
 
         .alt-market-links a {
             font-size: 0.75rem;
             color: #232f3e;
             text-decoration: none;
-            font-weight: 600;
-            padding: 3px 7px;
+            font-weight: 700;
+            padding: 2px 6px;
             border-radius: 4px;
-            border: 1px solid #cbd5e1;
-            background: white;
+            border: 1px solid #e2e8f0;
             transition: all 0.2s;
         }
 
@@ -284,119 +269,199 @@
             color: var(--accent);
         }
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+        /* --- INLINE NEWSLETTER BOX --- */
+        .newsletter-box {
+            margin-top: auto;
+            background: rgba(255, 255, 255, 0.6);
+            border: 1px solid rgba(74, 124, 89, 0.15);
+            padding: 20px;
+            border-radius: 16px;
         }
 
-        @media(max-width: 600px) {
-            .form-group {
-                flex-direction: column;
+        .newsletter-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            font-size: 0.9rem;
+            outline: none;
+            background: white;
+        }
+
+        input[type="email"]:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background-color: #3b6347;
+        }
+
+        footer {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* --- RESPONSIVE FALLBACK FOR MOBILE --- */
+        @media(max-width: 900px) {
+            .wrapper {
+                grid-template-columns: 1fr;
             }
-            button {
-                width: 100%;
+            .left-panel {
+                position: relative;
+                height: auto;
+                padding: 40px 20px 20px;
+            }
+            .right-stream {
+                padding: 20px;
+            }
+            .newsletter-box {
+                margin-top: 30px;
+            }
+            .book-row {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+            .book-cover-art {
+                width: 140px;
+                height: 210px;
+                margin-bottom: 15px;
+            }
+            .purchase-actions {
+                justify-content: center;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- Dynamic Canvas Background -->
+    <!-- Dynamic Interactive Canvas Context Background -->
     <canvas id="bg-canvas"></canvas>
 
-    <div class="container">
+    <div class="wrapper">
         
-        <!-- Header / Bio Section -->
-        <header>
-            <div class="profile-wrapper">
-                <svg class="profile-placeholder-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <!-- FIXED LEFT COLUMN PANEL -->
+        <aside class="left-panel">
+            <div class="profile-section">
+                <div class="profile-frame">
+                    <svg class="profile-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                </div>
+                <h1>Your Name</h1>
+                <p class="tagline">Author Portfolio & Library</p>
             </div>
-            <h1>Your Name</h1>
-            <p class="tagline">Welcome to my corner of the literary world.</p>
-        </header>
 
-        <!-- About Me Section -->
-        <section class="section-card">
-            <h2>About Me</h2>
-            <p style="color: var(--text-main); margin-top: 10px;">
-                Hello and welcome! I am an author dedicated to crafting stories that entertain, inspire, and connect. Whether you are a longtime reader or just discovering my work, I'm absolutely thrilled to have you here. Explore my library below, and don't forget to join the newsletter for exclusive behind-the-scenes content and project updates!
-            </p>
-        </section>
+            <!-- Integrated Side Mailing List Block -->
+            <div class="newsletter-box">
+                <p>Subscribe for exclusive early-access updates and project releases.</p>
+                <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
+                    <div class="form-group">
+                        <input type="email" placeholder="Your email address..." required>
+                        <button type="submit">Join Mailing List</button>
+                    </div>
+                </form>
+            </div>
+        </aside>
 
-        <!-- Book Showcase Section -->
-        <section class="section-card">
-            <h2>My Books</h2>
+        <!-- SCROLLABLE RIGHT COLUMN STREAM -->
+        <main class="right-stream">
             
-            <div class="book-grid">
-                
-                <!-- Book 1 Card -->
-                <div class="book-card">
-                    <div class="book-cover-placeholder">BOOK ONE</div>
-                    <div class="book-title">The First Adventure</div>
-                    <div class="book-desc">A gripping, fast-paced tale about unexpected journeys and discovering hidden worlds.</div>
-                    
-                    <!-- Main dynamic location button -->
-                    <a href="https://www.amazon.com/dp/B000000001" target="_blank" class="amazon-link amazon-btn" data-asin="B000000001">
-                        Buy on Amazon ➔
-                    </a>
+            <!-- Biography Card -->
+            <section class="content-card">
+                <h2>About Me</h2>
+                <p style="font-size: 0.98rem; color: var(--text-main);">
+                    Hello and welcome! I am an author dedicated to crafting stories that entertain, inspire, and connect. Whether you are a longtime reader or just discovering my work, I'm absolutely thrilled to have you here. Explore my library below, and don't forget to join the newsletter for exclusive behind-the-scenes content and project updates!
+                </p>
+            </section>
 
-                    <!-- Sub-box for alternative international shops -->
-                    <div class="alt-markets-box">
-                        <span class="alt-market-label">Gifting Abroad? Shop Store:</span>
-                        <div class="alt-market-links">
-                            <a href="https://www.amazon.com/dp/B000000001" target="_blank">US</a>
-                            <a href="https://www.amazon.co.uk/dp/B000000001" target="_blank">UK</a>
-                            <a href="https://www.amazon.ca/dp/B000000001" target="_blank">CA</a>
-                            <a href="https://www.amazon.com.au/dp/B000000001" target="_blank">AU</a>
-                            <a href="https://www.amazon.de/dp/B000000001" target="_blank">DE</a>
+            <!-- Book Library Showcase Card -->
+            <section class="content-card">
+                <h2>Books & Publications</h2>
+                <div class="book-list">
+                    
+                    <!-- Asymmetrical Horizontal Book Row 1 -->
+                    <div class="book-row">
+                        <div class="book-cover-art">BOOK ONE</div>
+                        <div class="book-details">
+                            <div>
+                                <div class="book-title">The First Adventure</div>
+                                <div class="book-desc">A gripping, fast-paced tale about unexpected journeys and discovering hidden worlds.</div>
+                            </div>
+                            <div class="purchase-actions">
+                                <a href="https://www.amazon.com/dp/B000000001" target="_blank" class="amazon-link amazon-btn" data-asin="B000000001">
+                                    Buy Locally ➔
+                                </a>
+                                <div class="alt-markets-inline">
+                                    <span class="alt-market-title">Gifting:</span>
+                                    <div class="alt-market-links">
+                                        <a href="https://www.amazon.com/dp/B000000001" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B000000001" target="_blank">UK</a>
+                                        <a href="https://www.amazon.ca/dp/B000000001" target="_blank">CA</a>
+                                        <a href="https://www.amazon.com.au/dp/B000000001" target="_blank">AU</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Book 2 Card -->
-                <div class="book-card">
-                    <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #b0c4de, #4682b4);">BOOK TWO</div>
-                    <div class="book-title">Echoes of Time</div>
-                    <div class="book-desc">An emotional exploration of history, memory, and choices that echo across generations.</div>
-                    
-                    <!-- Main dynamic location button -->
-                    <a href="https://www.amazon.com/dp/B000000002" target="_blank" class="amazon-link amazon-btn" data-asin="B000000002">
-                        Buy on Amazon ➔
-                    </a>
-
-                    <!-- Sub-box for alternative international shops -->
-                    <div class="alt-markets-box">
-                        <span class="alt-market-label">Gifting Abroad? Shop Store:</span>
-                        <div class="alt-market-links">
-                            <a href="https://www.amazon.com/dp/B000000002" target="_blank">US</a>
-                            <a href="https://www.amazon.co.uk/dp/B000000002" target="_blank">UK</a>
-                            <a href="https://www.amazon.ca/dp/B000000002" target="_blank">CA</a>
-                            <a href="https://www.amazon.com.au/dp/B000000002" target="_blank">AU</a>
-                            <a href="https://www.amazon.de/dp/B000000002" target="_blank">DE</a>
+                    <!-- Asymmetrical Horizontal Book Row 2 -->
+                    <div class="book-row">
+                        <div class="book-cover-art" style="background: linear-gradient(135deg, #b0c4de, #4682b4);">BOOK TWO</div>
+                        <div class="book-details">
+                            <div>
+                                <div class="book-title">Echoes of Time</div>
+                                <div class="book-desc">An emotional exploration of history, memory, and choices that echo across generations.</div>
+                            </div>
+                            <div class="purchase-actions">
+                                <a href="https://www.amazon.com/dp/B000000002" target="_blank" class="amazon-link amazon-btn" data-asin="B000000002">
+                                    Buy Locally ➔
+                                ➔
+                                </a>
+                                <div class="alt-markets-inline">
+                                    <span class="alt-market-title">Gifting:</span>
+                                    <div class="alt-market-links">
+                                        <a href="https://www.amazon.com/dp/B000000002" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B000000002" target="_blank">UK</a>
+                                        <a href="https://www.amazon.ca/dp/B000000002" target="_blank">CA</a>
+                                        <a href="https://www.amazon.com.au/dp/B000000002" target="_blank">AU</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
+            </section>
 
-            </div>
-        </section>
-
-        <!-- Mailing List / Newsletter Section -->
-        <section class="section-card">
-            <h2>Join My Newsletter</h2>
-            <p class="newsletter-text">Subscribe to get real-time book updates, exclusive previews, and reader bonuses delivered straight to your inbox.</p>
-            <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
-                <div class="form-group">
-                    <input type="email" placeholder="Enter your email address..." required>
-                    <button type="submit">Subscribe</button>
-                </div>
-            </form>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 Your Name. Powered by Cloudflare Pages.</p>
-        </footer>
+            <footer>
+                <p>&copy; 2026 Your Name. Powered by Cloudflare Pages.</p>
+            </footer>
+        </main>
 
     </div>
 
@@ -434,9 +499,9 @@
                 glow.x, glow.y, Math.max(width, height) * 0.6
             );
             
-            gradient.addColorStop(0, 'rgba(212, 230, 215, 0.4)'); 
-            gradient.addColorStop(0.3, 'rgba(240, 234, 224, 0.2)'); 
-            gradient.addColorStop(1, 'rgba(249, 248, 246, 0)');    
+            gradient.addColorStop(0, 'rgba(212, 230, 215, 0.35)'); 
+            gradient.addColorStop(0.3, 'rgba(240, 234, 224, 0.15)'); 
+            gradient.addColorStop(1, 'rgba(247, 246, 243, 0)');    
 
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, width, height);
@@ -472,7 +537,6 @@
                 console.log("Location check bypassed. Defaulting main store buttons to Amazon.com.");
             }
 
-            // Update only the main big action buttons dynamically
             const mainLinks = document.querySelectorAll('.amazon-link');
             mainLinks.forEach(link => {
                 const asin = link.getAttribute('data-asin');
