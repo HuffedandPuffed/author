@@ -39,7 +39,8 @@
             width: 100vw;
             height: 100vh;
             z-index: -1;
-            pointer-events: none;
+            /* We want the mouse events to pass through the background to track it */
+            pointer-events: none; 
         }
 
         /* --- ASYMMETRICAL WRAPPER GRID --- */
@@ -72,7 +73,7 @@
             width: 130px;
             height: 150px;
             background: linear-gradient(135deg, #cbd5e1, #94a3b8);
-            border-radius: 24px 4px 24px 24px; /* Asymmetric corners */
+            border-radius: 24px 4px 24px 24px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -150,7 +151,6 @@
             gap: 35px;
         }
 
-        /* Horizontal/Asymmetrical design pattern for Book rows */
         .book-row {
             display: grid;
             grid-template-columns: 160px 1fr;
@@ -204,7 +204,6 @@
             margin-bottom: 20px;
         }
 
-        /* Action elements inside the book rows */
         .purchase-actions {
             display: flex;
             align-items: center;
@@ -361,7 +360,7 @@
 </head>
 <body>
 
-    <!-- Dynamic Interactive Canvas Context Background -->
+    <!-- Dynamic Interactive Canvas Background -->
     <canvas id="bg-canvas"></canvas>
 
     <div class="wrapper">
@@ -440,7 +439,6 @@
                             <div class="purchase-actions">
                                 <a href="https://www.amazon.com/dp/B000000002" target="_blank" class="amazon-link amazon-btn" data-asin="B000000002">
                                     Buy Locally ➔
-                                ➔
                                 </a>
                                 <div class="alt-markets-inline">
                                     <span class="alt-market-title">Gifting:</span>
@@ -467,7 +465,7 @@
 
     <script>
         /* ==========================================================
-           1. DYNAMIC CURSOR TRACKING BACKGROUND (FLUID GLOW)
+           1. FOUNTAIN PEN NIB & CHASING INK PARTICLES BACKGROUND
         ========================================================== */
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
@@ -475,40 +473,151 @@
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
-        let mouse = { x: width / 2, y: height / 2 };
-        let glow = { x: width / 2, y: height / 2 };
+        let mouse = { x: width / 2, y: height / 2, active: false };
+        let penTarget = { x: width / 2, y: height / 2, angle: 0 };
+        
+        // Array holding our ink particles
+        const particles = [];
+        const maxParticles = 45;
+
+        // Populate a few initial drifting dots that will start on screen
+        for(let i = 0; i < 20; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                radius: Math.random() * 2.5 + 1.5,
+                opacity: Math.random() * 0.3 + 0.1
+            });
+        }
 
         window.addEventListener('resize', () => {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
         });
 
+        // Use the whole document window viewport to catch coordinates
         window.addEventListener('mousemove', (e) => {
             mouse.x = e.clientX;
             mouse.y = e.clientY;
+            mouse.active = true;
+
+            // Generate an active trailing particle directly behind the pen movement path
+            if (Math.random() < 0.4) {
+                particles.push({
+                    x: penTarget.x,
+                    y: penTarget.y,
+                    vx: (Math.random() - 0.5) * 1,
+                    vy: (Math.random() - 0.5) * 1,
+                    radius: Math.random() * 3 + 2,
+                    opacity: 0.6
+                });
+            }
         });
 
-        function animateBackground() {
-            glow.x += (mouse.x - glow.x) * 0.08;
-            glow.y += (mouse.y - glow.y) * 0.08;
+        // Function that renders a beautiful geometric vector Fountain Pen Nib tip
+        function drawPenNib(x, y, angle) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle + Math.PI / 4); // Align the tip naturally with movement vector
 
+            // Draw the metallic outer structure of the nib
+            ctx.beginPath();
+            ctx.moveTo(0, 0); // The tip
+            ctx.lineTo(-10, -18);
+            ctx.lineTo(-7, -35);
+            ctx.lineTo(7, -35);
+            ctx.lineTo(10, -18);
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(74, 124, 89, 0.18)'; // Soft transparent green-gold tone
+            ctx.fill();
+            ctx.strokeStyle = 'rgba(74, 124, 89, 0.35)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            // Draw the classic fountain breather-hole & feeding ink slit lines
+            ctx.beginPath();
+            ctx.arc(0, -22, 2, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(74, 124, 89, 0.4)';
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.moveTo(0, 0);
+            ctx.lineTo(0, -20);
+            ctx.strokeStyle = 'rgba(74, 124, 89, 0.4)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.restore();
+        }
+
+        function animate() {
             ctx.clearRect(0, 0, width, height);
 
-            let gradient = ctx.createRadialGradient(
-                glow.x, glow.y, 10, 
-                glow.x, glow.y, Math.max(width, height) * 0.6
-            );
+            // 1. Interpolate pen target tracking to lag organically behind mouse coordinates
+            let dx = mouse.x - penTarget.x;
+            let dy = mouse.y - penTarget.y;
             
-            gradient.addColorStop(0, 'rgba(212, 230, 215, 0.35)'); 
-            gradient.addColorStop(0.3, 'rgba(240, 234, 224, 0.15)'); 
-            gradient.addColorStop(1, 'rgba(247, 246, 243, 0)');    
+            // Calculate rotational path angles matching navigation trajectory
+            if(Math.abs(dx) > 0.1 || Math.abs(dy) > 0.1) {
+                penTarget.angle = Math.atan2(dy, dx);
+            }
+            
+            penTarget.x += dx * 0.08;
+            penTarget.y += dy * 0.08;
 
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, width, height);
+            // 2. Loop, process, and adjust ink particle actions
+            for (let i = particles.length - 1; i >= 0; i--) {
+                let p = particles[i];
 
-            requestAnimationFrame(animateBackground);
+                // If the mouse is active, inject gravity forces drawing dots toward the pen nib
+                if (mouse.active) {
+                    let pDx = penTarget.x - p.x;
+                    let pDy = penTarget.y - p.y;
+                    let distance = Math.sqrt(pDx * pDx + pDy * pDy);
+
+                    // Pull closer elements faster, create an absolute organic cluster effect
+                    if (distance < 350) {
+                        p.vx += (pDx / distance) * 0.08;
+                        p.vy += (pDy / distance) * 0.08;
+                    }
+                }
+
+                // Apply velocities, dampings, and air resistance frictions
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vx *= 0.94;
+                p.vy *= 0.94;
+
+                // Slowly fade natural trailing particles down
+                p.opacity -= 0.002;
+
+                // Render out individual ink dot nodes safely
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(74, 124, 89, ${p.opacity})`;
+                ctx.fill();
+
+                // Delete burned/invisible items to prevent memory leaks
+                if (p.opacity <= 0 || p.x < 0 || p.x > width || p.y < 0 || p.y > height) {
+                    particles.splice(i, 1);
+                }
+            }
+
+            // Keep array size capped to run perfectly on light mobile devices
+            if (particles.length > maxParticles) {
+                particles.shift();
+            }
+
+            // 3. Render the Pen Nib drawing anchor right on top
+            if(mouse.active) {
+                drawPenNib(penTarget.x, penTarget.y, penTarget.angle);
+            }
+
+            requestAnimationFrame(animate);
         }
-        animateBackground();
+        animate();
 
 
         /* ==========================================================
