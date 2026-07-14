@@ -120,6 +120,41 @@
             border-radius: 2px;
         }
 
+        /* --- MARKETPLACE OVERRIDE SELECTOR --- */
+        .selector-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            background-color: var(--accent-light);
+            padding: 12px 18px;
+            border-radius: 8px;
+            flex-wrap: wrap;
+            border: 1px solid rgba(74, 124, 89, 0.15);
+        }
+
+        .selector-box label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2f4f39;
+        }
+
+        .market-dropdown {
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            border: 1px solid #cbd5e1;
+            background-color: white;
+            color: var(--text-main);
+            outline: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .market-dropdown:focus {
+            border-color: var(--accent);
+        }
+
         /* --- NEWSLETTER FORM --- */
         .newsletter-text {
             color: var(--text-muted);
@@ -262,7 +297,6 @@
         <!-- Header / Bio Section -->
         <header>
             <div class="profile-wrapper">
-                <!-- Friendly placeholder icon (Swap out with an <img src="yourphoto.jpg"> later) -->
                 <svg class="profile-placeholder-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
             </div>
             <h1>Your Name</h1>
@@ -280,9 +314,24 @@
         <!-- Smart Geolocation Book Showcase Section -->
         <section class="section-card">
             <h2>My Books</h2>
-            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px;">
-                ✨ <em>The buttons below automatically adapt to open your local regional Amazon store!</em>
-            </p>
+            
+            <!-- Dynamic Country Override Selection Box -->
+            <div class="selector-box">
+                <label for="amazon-market-select">📍 Marketplace:</label>
+                <select id="amazon-market-select" class="market-dropdown">
+                    <option value="com">Amazon.com (US / International)</option>
+                    <option value="co.uk">Amazon.co.uk (United Kingdom)</option>
+                    <option value="ca">Amazon.ca (Canada)</option>
+                    <option value="com.au">Amazon.com.au (Australia)</option>
+                    <option value="de">Amazon.de (Germany)</option>
+                    <option value="fr">Amazon.fr (France)</option>
+                    <option value="co.jp">Amazon.co.jp (Japan)</option>
+                    <option value="in">Amazon.in (India)</option>
+                    <option value="com.br">Amazon.com.br (Brazil)</option>
+                    <option value="com.mx">Amazon.com.mx (Mexico)</option>
+                </select>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">(Change this to gift shop for another region)</span>
+            </div>
             
             <div class="book-grid">
                 
@@ -291,7 +340,6 @@
                     <div class="book-cover-placeholder">BOOK ONE</div>
                     <div class="book-title">The First Adventure</div>
                     <div class="book-desc">A gripping, fast-paced tale about unexpected journeys and discovering hidden worlds.</div>
-                    <!-- INSTRUCTION: Replace data-asin with your actual Amazon ASIN/ISBN identifier -->
                     <a href="https://www.amazon.com/dp/B000000001" target="_blank" class="amazon-link amazon-btn" data-asin="B000000001">
                         Buy on Amazon ➔
                     </a>
@@ -299,10 +347,9 @@
 
                 <!-- Book 2 Card -->
                 <div class="book-card">
-                    <div class="book-cover-placeholder" style="linear-gradient(135deg, #b0c4de, #4682b4);">BOOK TWO</div>
+                    <div class="book-cover-placeholder" style="background: linear-gradient(135deg, #b0c4de, #4682b4);">BOOK TWO</div>
                     <div class="book-title">Echoes of Time</div>
                     <div class="book-desc">An emotional exploration of history, memory, and choices that echo across generations.</div>
-                    <!-- INSTRUCTION: Replace data-asin with your actual Amazon ASIN/ISBN identifier -->
                     <a href="https://www.amazon.com/dp/B000000002" target="_blank" class="amazon-link amazon-btn" data-asin="B000000002">
                         Buy on Amazon ➔
                     </a>
@@ -315,7 +362,7 @@
         <section class="section-card">
             <h2>Join My Newsletter</h2>
             <p class="newsletter-text">Subscribe to get real-time book updates, exclusive previews, and reader bonuses delivered straight to your inbox.</p>
-            <form action="#" method="POST" onsubmit="alert('Thank you for subscribing! (Connect this to your email service provider like MailerLite or Mailchimp later)'); return false;">
+            <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
                 <div class="form-group">
                     <input type="email" placeholder="Enter your email address..." required>
                     <button type="submit">Subscribe</button>
@@ -339,9 +386,7 @@
         let width = canvas.width = window.innerWidth;
         let height = canvas.height = window.innerHeight;
 
-        // Interactive mouse coordinates
         let mouse = { x: width / 2, y: height / 2 };
-        // Smooth transition target coordinates
         let glow = { x: width / 2, y: height / 2 };
 
         window.addEventListener('resize', () => {
@@ -355,22 +400,19 @@
         });
 
         function animateBackground() {
-            // Smoothly move the liquid glow towards the cursor (Lerp effect)
             glow.x += (mouse.x - glow.x) * 0.08;
             glow.y += (mouse.y - glow.y) * 0.08;
 
             ctx.clearRect(0, 0, width, height);
 
-            // Establish a beautiful ambient soft radial gradient centered on the cursor path
             let gradient = ctx.createRadialGradient(
                 glow.x, glow.y, 10, 
                 glow.x, glow.y, Math.max(width, height) * 0.6
             );
             
-            // Soft friendly pastel blobs shifting values dynamically
-            gradient.addColorStop(0, 'rgba(212, 230, 215, 0.5)'); // Very soft transparent sage green
-            gradient.addColorStop(0.3, 'rgba(240, 234, 224, 0.3)'); // Soft warm cream
-            gradient.addColorStop(1, 'rgba(249, 248, 246, 0)');    // Fades perfectly out to main body background
+            gradient.addColorStop(0, 'rgba(212, 230, 215, 0.5)'); 
+            gradient.addColorStop(0.3, 'rgba(240, 234, 224, 0.3)'); 
+            gradient.addColorStop(1, 'rgba(249, 248, 246, 0)');    
 
             ctx.fillStyle = gradient;
             ctx.fillRect(0, 0, width, height);
@@ -381,44 +423,57 @@
 
 
         /* ==========================================================
-           2. INTELLIGENT AMAZON GEOLOCATION LINK REDIRECTOR
+           2. AMAZON GEOLOCATION ENGINE WITH DROPDOWN OVERRIDE
         ========================================================== */
-        async function localizeAmazonLinks() {
-            try {
-                // Free, client-side open IP lookup service
-                const response = await fetch('https://ipapi.co/json/');
-                if (!response.ok) return;
-                
-                const data = await response.json();
-                const country = data.country_code; // Grab 2-letter country code
-                
-                // Set appropriate Amazon extension base on country location
-                let extension = 'com';
-                if (country === 'GB' || country === 'UK') extension = 'co.uk';
-                else if (country === 'CA') extension = 'ca';
-                else if (country === 'AU') extension = 'com.au';
-                else if (country === 'DE') extension = 'de';
-                else if (country === 'FR') extension = 'fr';
-                else if (country === 'JP') extension = 'co.jp';
-                else if (country === 'IN') extension = 'in';
-                else if (country === 'BR') extension = 'com.br';
-                else if (country === 'MX') extension = 'com.mx';
+        const marketDropdown = document.getElementById('amazon-market-select');
 
-                // Locate all book links marked with class "amazon-link"
-                const links = document.querySelectorAll('.amazon-link');
-                links.forEach(link => {
-                    const asin = link.getAttribute('data-asin');
-                    if (asin) {
-                        // Dynamically morph the target store URL matching their region
-                        link.href = `https://www.amazon.${extension}/dp/${asin}`;
-                    }
-                });
-            } catch (error) {
-                console.log("Geolocation lookup skipped or blocked. Defaulting safely to Amazon.com stores.");
-            }
+        // Country code map to Amazon domains
+        const regionMap = {
+            'US': 'com', 'GB': 'co.uk', 'UK': 'co.uk', 'CA': 'ca', 
+            'AU': 'com.au', 'DE': 'de', 'FR': 'fr', 'JP': 'co.jp', 
+            'IN': 'in', 'BR': 'com.br', 'MX': 'com.mx'
+        };
+
+        // Function that physically updates the URLs of all purchase buttons
+        function assignAmazonUrls(extension) {
+            const links = document.querySelectorAll('.amazon-link');
+            links.forEach(link => {
+                const asin = link.getAttribute('data-asin');
+                if (asin) {
+                    link.href = `https://www.amazon.${extension}/dp/${asin}`;
+                }
+            });
         }
-        // Run immediately when the DOM fully initialises
-        window.addEventListener('DOMContentLoaded', localizeAmazonLinks);
+
+        // Automatic engine run on boot up
+        async function runGeolocationEngine() {
+            let activeExtension = 'com'; // Standard base fallback
+
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                if (response.ok) {
+                    const data = await response.json();
+                    const detectedCountry = data.country_code;
+                    
+                    if (regionMap[detectedCountry]) {
+                        activeExtension = regionMap[detectedCountry];
+                    }
+                }
+            } catch (error) {
+                console.log("Automatic location check bypassed. Running default storefront.");
+            }
+
+            // Sync visual dropdown UI to active extension and inject URLs
+            marketDropdown.value = activeExtension;
+            assignAmazonUrls(activeExtension);
+        }
+
+        // Listen for user manual override alterations
+        marketDropdown.addEventListener('change', (event) => {
+            assignAmazonUrls(event.target.value);
+        });
+
+        window.addEventListener('DOMContentLoaded', runGeolocationEngine);
     </script>
 </body>
 </html>
