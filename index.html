@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Colin Bamforth | Author</title>
+    <title>Colin Bamforth | Author Portfolio</title>
     <style>
         /* --- DESIGN SYSTEM & COLORS --- */
         :root {
             --text-main: #2b3639;
             --text-muted: #5a696c;
-            --accent: #4a7c59; /* Sage Green */
+            --accent: #4a7c59; /* Classic Sage Green */
             --accent-light: #eef5f0;
-            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-bg: rgba(255, 255, 255, 0.94);
             --shadow: 0 15px 35px rgba(43, 54, 57, 0.06);
         }
 
@@ -22,13 +22,12 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        /* --- WRITING THEMED BACKGROUND WITH LIGHT OVERLAY --- */
         body {
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(247, 246, 243, 0.92), rgba(247, 246, 243, 0.92)), 
+            background-image: linear-gradient(rgba(247, 246, 243, 0.93), rgba(247, 246, 243, 0.93)), 
                               url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -61,41 +60,39 @@
             text-align: left;
         }
 
+        /* Frame housing your real uploaded profile photo */
         .profile-frame {
-            width: 130px;
-            height: 150px;
-            background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+            width: 140px;
+            height: 140px;
             border-radius: 24px 4px 24px 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 30px;
             box-shadow: var(--shadow);
             border: 4px solid white;
             overflow: hidden;
+            margin-bottom: 25px;
+            background-color: #cbd5e1;
         }
 
-        .profile-icon {
-            fill: #f1f5f9;
-            width: 55px;
-            height: 55px;
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         h1 {
             font-size: 2.4rem;
             color: #1c2426;
             line-height: 1.2;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 800;
             letter-spacing: -0.02em;
         }
 
         .tagline {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--accent);
             font-weight: 600;
             margin-bottom: 20px;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
@@ -119,9 +116,9 @@
         }
 
         h2 {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            letter-spacing: -0.01em;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            letter-spacing: 0.02em;
             text-transform: uppercase;
             font-weight: 700;
             color: #1c2426;
@@ -138,20 +135,32 @@
             border-radius: 50%;
         }
 
-        /* --- ASYMMETRICAL BOOK STACK --- */
+        .shelf-title {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 25px 0 15px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed rgba(74, 124, 89, 0.2);
+        }
+        .shelf-title:first-of-type { margin-top: 0; }
+
+        /* --- ASYMMETRICAL BOOK ROW DISPLAY --- */
         .book-list {
             display: flex;
             flex-direction: column;
-            gap: 35px;
+            gap: 30px;
         }
 
         .book-row {
             display: grid;
-            grid-template-columns: 160px 1fr;
-            gap: 30px;
+            grid-template-columns: 150px 1fr;
+            gap: 25px;
             align-items: start;
-            background: rgba(255, 255, 255, 0.5);
-            padding: 25px;
+            background: rgba(255, 255, 255, 0.45);
+            padding: 20px;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.6);
             transition: transform 0.2s ease;
@@ -161,22 +170,32 @@
             transform: translateY(-2px);
         }
 
+        /* Custom Cover Renderers Stylized to Match Your Real Art Vibrancy */
         .book-cover-art {
             width: 100%;
-            height: 230px;
-            background: linear-gradient(135deg, #a3b899, #4a7c59);
-            border-radius: 4px 12px 12px 4px;
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.12);
+            height: 215px;
+            border-radius: 4px 10px 10px 4px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.8rem;
             text-align: center;
-            padding: 15px;
-            border-left: 5px solid rgba(0,0,0,0.15);
+            padding: 12px;
+            border-left: 4px solid rgba(0,0,0,0.18);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
         }
+
+        /* Thematic Color Palettes Matching Your Real Cover Artwork */
+        .cover-silence { background: linear-gradient(135deg, #1a1a1a, #2d3748); color: #cddc39; }
+        .cover-shift { background: linear-gradient(135deg, #0f2b38, #164e63); color: #fff; }
+        .cover-stress-us { background: linear-gradient(135deg, #dd6b20, #3182ce); color: #fff; }
+        .cover-stress-au { background: linear-gradient(135deg, #e53e3e, #2b6cb0); color: #fff; }
+        .cover-puzzles { background: linear-gradient(135deg, #3f51b5, #5c6bc0); color: #fff; }
 
         .book-details {
             display: flex;
@@ -186,22 +205,30 @@
         }
 
         .book-title {
-            font-size: 1.3rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #1c2426;
+            margin-bottom: 4px;
+        }
+
+        .book-subtitle {
+            font-size: 0.88rem;
+            font-style: italic;
+            color: var(--accent);
             margin-bottom: 8px;
+            font-weight: 500;
         }
 
         .book-desc {
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .purchase-actions {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
@@ -209,14 +236,14 @@
             background-color: #232f3e;
             color: #ffa41c;
             text-decoration: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 0.9rem;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.88rem;
             font-weight: 600;
             transition: background 0.2s;
             display: inline-flex;
             align-items: center;
-            box-shadow: 0 4px 10px rgba(35, 47, 62, 0.15);
+            box-shadow: 0 3px 8px rgba(35, 47, 62, 0.1);
         }
 
         .amazon-btn:hover {
@@ -226,32 +253,32 @@
         .alt-markets-inline {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             background: white;
-            padding: 6px 12px;
-            border-radius: 8px;
+            padding: 5px 10px;
+            border-radius: 6px;
             border: 1px solid #e2e8f0;
         }
 
         .alt-market-title {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 600;
             color: var(--text-muted);
-            margin-right: 4px;
+            margin-right: 2px;
         }
 
         .alt-market-links {
             display: flex;
-            gap: 5px;
+            gap: 4px;
         }
 
         .alt-market-links a {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #232f3e;
             text-decoration: none;
             font-weight: 700;
-            padding: 2px 6px;
-            border-radius: 4px;
+            padding: 2px 5px;
+            border-radius: 3px;
             border: 1px solid #e2e8f0;
             transition: all 0.2s;
         }
@@ -262,10 +289,10 @@
             color: var(--accent);
         }
 
-        /* --- INLINE NEWSLETTER BOX --- */
+        /* --- SIDEBAR NEWSLETTER --- */
         .newsletter-box {
             margin-top: auto;
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.75);
             border: 1px solid rgba(74, 124, 89, 0.15);
             padding: 20px;
             border-radius: 16px;
@@ -293,10 +320,6 @@
             background: white;
         }
 
-        input[type="email"]:focus {
-            border-color: var(--accent);
-        }
-
         button {
             background-color: var(--accent);
             color: white;
@@ -309,9 +332,7 @@
             transition: background 0.2s;
         }
 
-        button:hover {
-            background-color: #3b6347;
-        }
+        button:hover { background-color: #3b6347; }
 
         footer {
             font-size: 0.8rem;
@@ -320,35 +341,14 @@
             border-top: 1px solid rgba(0,0,0,0.05);
         }
 
-        /* --- RESPONSIVE FALLBACK FOR MOBILE --- */
         @media(max-width: 900px) {
-            .wrapper {
-                grid-template-columns: 1fr;
-            }
-            .left-panel {
-                position: relative;
-                height: auto;
-                padding: 40px 20px 20px;
-            }
-            .right-stream {
-                padding: 20px;
-            }
-            .newsletter-box {
-                margin-top: 30px;
-            }
-            .book-row {
-                grid-template-columns: 1fr;
-                justify-items: center;
-                text-align: center;
-            }
-            .book-cover-art {
-                width: 140px;
-                height: 210px;
-                margin-bottom: 15px;
-            }
-            .purchase-actions {
-                justify-content: center;
-            }
+            .wrapper { grid-template-columns: 1fr; }
+            .left-panel { position: relative; height: auto; padding: 40px 20px 20px; }
+            .right-stream { padding: 20px; }
+            .newsletter-box { margin-top: 30px; }
+            .book-row { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+            .book-cover-art { width: 130px; height: 195px; margin-bottom: 12px; }
+            .purchase-actions { justify-content: center; }
         }
     </style>
 </head>
@@ -360,15 +360,15 @@
         <aside class="left-panel">
             <div class="profile-section">
                 <div class="profile-frame">
-                    <svg class="profile-icon" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <!-- Pointing to your local repo filename image asset directly -->
+                    <img src="Colin.webp" alt="Colin Bamforth Portrait">
                 </div>
                 <h1>Colin Bamforth</h1>
                 <p class="tagline">Author</p>
             </div>
 
-            <!-- Integrated Side Mailing List Block -->
             <div class="newsletter-box">
-                <p>Subscribe for exclusive early-access updates and project releases.</p>
+                <p>Subscribe for exclusive early-access updates and new book releases.</p>
                 <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
                     <div class="form-group">
                         <input type="email" placeholder="Your email address..." required>
@@ -383,69 +383,137 @@
             
             <!-- Biography Card -->
             <section class="content-card">
-                <h2>About Me</h2>
+                <h2>About Colin</h2>
                 <p style="font-size: 0.98rem; color: var(--text-main); margin-bottom: 12px;">
-                    Welcome! I'm Colin, and I spend my time exploring the spaces where creativity meets structure, crafting stories designed to entertain, challenge, and connect. My goal as an author is to balance professional depth with an open, friendly narrative voice—inviting you to look closely at the world through a slightly different lens.
+                    Welcome! I'm Colin, an author driven by exploring the spaces where real-world human experience intersects with compelling structure. Drawing from deep firsthand insight into the high-stakes, fast-moving environments of emergency services, my writing navigates intense frontline realities, human resilience, and the critical systems that support personal recovery.
                 </p>
                 <p style="font-size: 0.98rem; color: var(--text-main);">
-                    Whether you have followed my creative journey from the start or just happened to drop by, I’m incredibly glad to have you here. This space is built to bring global readers together effortlessly, no matter where your local bookstore happens to be. Feel free to explore the library below, look around, and join the mailing list so we can share the very next chapter together.
+                    My work crosses distinct spaces—from tension-filled hospital thrillers and illuminating memoirs to science-backed stress-management frameworks designed to bring clinical strategies out into everyday life. Across all my projects, I value delivering professional, authoritative depth balanced with a friendly, welcoming, and open narrative voice. Take a look around my library shelf space below, and join the reader circle list to ensure you never miss the launch of the next volume.
                 </p>
             </section>
 
             <!-- Book Library Showcase Card -->
             <section class="content-card">
-                <h2>Books & Publications</h2>
+                <h2>The Library</h2>
                 <div class="book-list">
                     
-                    <!-- Asymmetrical Horizontal Book Row 1 -->
+                    <div class="shelf-title">Frontline Medical & Thriller</div>
+
+                    <!-- Book 1 -->
                     <div class="book-row">
-                        <div class="book-cover-art">BOUND TEXT</div>
+                        <div class="book-cover-art cover-silence">Standard Operating Silence</div>
                         <div class="book-details">
                             <div>
-                                <!-- TIP: Edit the title and description text here -->
-                                <div class="book-title">Bound Text: The Art of Narrative</div>
-                                <div class="book-desc">An insightful exploration into the architecture of modern storytelling, mapping the lines that connect writers and global readers across changing landscapes.</div>
+                                <div class="book-title">Standard Operating Silence (Book 1)</div>
+                                <div class="book-subtitle">"The truth was never meant to survive."</div>
+                                <div class="book-desc">A gripping medical thriller exploring systemic shadows, uncovering industrial vulnerabilities hidden right inside our frontline medical systems where stakes are instantly life or death.</div>
                             </div>
                             <div class="purchase-actions">
-                                <!-- TIP: Change data-asin="B0XXXXXX" to your true Amazon identifier -->
-                                <a href="https://www.amazon.com/dp/B000000001" target="_blank" class="amazon-link amazon-btn" data-asin="B000000001">
-                                    Buy Locally ➔
-                                </a>
+                                <a href="https://www.amazon.com/dp/B01SILENCE" target="_blank" class="amazon-link amazon-btn" data-asin="B01SILENCE">Buy Locally ➔</a>
                                 <div class="alt-markets-inline">
                                     <span class="alt-market-title">Gifting:</span>
                                     <div class="alt-market-links">
-                                        <!-- TIP: Change the extensions/ASINs inside these specific links if gifting to a specific ASIN -->
-                                        <a href="https://www.amazon.com/dp/B000000001" target="_blank">US</a>
-                                        <a href="https://www.amazon.co.uk/dp/B000000001" target="_blank">UK</a>
-                                        <a href="https://www.amazon.ca/dp/B000000001" target="_blank">CA</a>
-                                        <a href="https://www.amazon.com.au/dp/B000000001" target="_blank">AU</a>
+                                        <a href="https://www.amazon.com/dp/B01SILENCE" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B01SILENCE" target="_blank">UK</a>
+                                        <a href="https://www.amazon.ca/dp/B01SILENCE" target="_blank">CA</a>
+                                        <a href="https://www.amazon.com.au/dp/B01SILENCE" target="_blank">AU</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Asymmetrical Horizontal Book Row 2 -->
+                    <!-- Book 2 -->
                     <div class="book-row">
-                        <div class="book-cover-art" style="background: linear-gradient(135deg, #b0c4de, #4682b4);">BEYOND THE PAGE</div>
+                        <div class="book-cover-art cover-shift">Shift Change</div>
                         <div class="book-details">
                             <div>
-                                <!-- TIP: Edit the title and description text here -->
-                                <div class="book-title">Beyond the Page</div>
-                                <div class="book-desc">A deep-dive continuation looking at narrative freedom, experimental prose styles, and the hidden mechanics behind reader engagement.</div>
+                                <div class="book-title">Shift Change: A Paramedic's Story</div>
+                                <div class="book-subtitle">"What survives when the sirens go silent." (Second Edition)</div>
+                                <div class="book-desc">A deeply authentic, moving exploration looking directly into the psychological and emotional landscapes of a first responder navigating modern high-intensity operations.</div>
                             </div>
                             <div class="purchase-actions">
-                                <!-- TIP: Change data-asin="B0XXXXXX" to your true Amazon identifier -->
-                                <a href="https://www.amazon.com/dp/B000000002" target="_blank" class="amazon-link amazon-btn" data-asin="B000000002">
-                                    Buy Locally ➔
-                                </a>
+                                <a href="https://www.amazon.com/dp/B02SHIFTCH" target="_blank" class="amazon-link amazon-btn" data-asin="B02SHIFTCH">Buy Locally ➔</a>
                                 <div class="alt-markets-inline">
                                     <span class="alt-market-title">Gifting:</span>
                                     <div class="alt-market-links">
-                                        <a href="https://www.amazon.com/dp/B000000002" target="_blank">US</a>
-                                        <a href="https://www.amazon.co.uk/dp/B000000002" target="_blank">UK</a>
-                                        <a href="https://www.amazon.ca/dp/B000000002" target="_blank">CA</a>
-                                        <a href="https://www.amazon.com.au/dp/B000000002" target="_blank">AU</a>
+                                        <a href="https://www.amazon.com/dp/B02SHIFTCH" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B02SHIFTCH" target="_blank">UK</a>
+                                        <a href="https://www.amazon.ca/dp/B02SHIFTCH" target="_blank">CA</a>
+                                        <a href="https://www.amazon.com.au/dp/B02SHIFTCH" target="_blank">AU</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shelf-title">Science-Backed Wellness Guides</div>
+
+                    <!-- Book 3 -->
+                    <div class="book-row">
+                        <div class="book-cover-art cover-stress-us">Overwhelmed By Stress? US</div>
+                        <div class="book-details">
+                            <div>
+                                <div class="book-title">Overwhelmed by Stress? (US Edition)</div>
+                                <div class="book-subtitle">A science-backed guide to reducing stress, regaining clarity, and restoring balance.</div>
+                                <div class="book-desc">A structured strategy map combining cognitive frameworks with clinical precision to help North American professionals target everyday burnout.</div>
+                            </div>
+                            <div class="purchase-actions">
+                                <a href="https://www.amazon.com/dp/B03STRESSU" target="_blank" class="amazon-link amazon-btn" data-asin="B03STRESSU">Buy Locally ➔</a>
+                                <div class="alt-markets-inline">
+                                    <span class="alt-market-title">Gifting:</span>
+                                    <div class="alt-market-links">
+                                        <a href="https://www.amazon.com/dp/B03STRESSU" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B03STRESSU" target="_blank">UK</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 4 -->
+                    <div class="book-row">
+                        <div class="book-cover-art cover-stress-au">Overwhelmed By Stress? AU/NZ</div>
+                        <div class="book-details">
+                            <div>
+                                <div class="book-title">Overwhelmed by Stress? (Australia & New Zealand Edition)</div>
+                                <div class="book-subtitle">A science-backed guide to reducing stress, regaining clarity, and restoring balance.</div>
+                                <div class="book-desc">Customized strategies designed to meet unique workplace stress cultures and recovery frameworks across Australia and New Zealand.</div>
+                            </div>
+                            <div class="purchase-actions">
+                                <a href="https://www.amazon.com.au/dp/B04STRESSA" target="_blank" class="amazon-link amazon-btn" data-asin="B04STRESSA">Buy Locally ➔</a>
+                                <div class="alt-markets-inline">
+                                    <span class="alt-market-title">Gifting:</span>
+                                    <div class="alt-market-links">
+                                        <a href="https://www.amazon.com.au/dp/B04STRESSA" target="_blank">AU</a>
+                                        <a href="https://www.amazon.co.nz/dp/B04STRESSA" target="_blank">NZ</a>
+                                        <a href="https://www.amazon.co.uk/dp/B04STRESSA" target="_blank">UK</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shelf-title">Brain Training & Activity Books</div>
+
+                    <!-- Book 5 -->
+                    <div class="book-row">
+                        <div class="book-cover-art cover-puzzles">Word Search Puzzles</div>
+                        <div class="book-details">
+                            <div>
+                                <div class="book-title">The Thematic Word Search Series</div>
+                                <div class="book-subtitle">For adults, seniors, teens, and children.</div>
+                                <div class="book-desc">A collection of cross-generational focus puzzle books exploring engaging, highly detailed theme sheets including **Construction**, **Fishing**, and **Motorcycle** topics.</div>
+                            </div>
+                            <div class="purchase-actions">
+                                <a href="https://www.amazon.com/dp/B05PUZZLES" target="_blank" class="amazon-link amazon-btn" data-asin="B05PUZZLES">Buy Locally ➔</a>
+                                <div class="alt-markets-inline">
+                                    <span class="alt-market-title">Gifting:</span>
+                                    <div class="alt-market-links">
+                                        <a href="https://www.amazon.com/dp/B05PUZZLES" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B05PUZZLES" target="_blank">UK</a>
+                                        <a href="https://www.amazon.ca/dp/B05PUZZLES" target="_blank">CA</a>
+                                        <a href="https://www.amazon.com.au/dp/B05PUZZLES" target="_blank">AU</a>
                                     </div>
                                 </div>
                             </div>
@@ -486,7 +554,7 @@
                     }
                 }
             } catch (error) {
-                console.log("Location check bypassed. Defaulting main store buttons to Amazon.com.");
+                console.log("Location engine defaulted to Amazon.com.");
             }
 
             const mainLinks = document.querySelectorAll('.amazon-link');
