@@ -10,9 +10,8 @@
             --text-main: #2b3639;
             --text-muted: #5a696c;
             --accent: #4a7c59; /* Classic Sage Green */
-            --accent-light: #eef5f0;
-            --card-bg: rgba(255, 255, 255, 0.94);
-            --shadow: 0 15px 35px rgba(43, 54, 57, 0.06);
+            --accent-light: rgba(74, 124, 89, 0.1);
+            --shadow: 0 12px 30px rgba(43, 54, 57, 0.08);
         }
 
         * {
@@ -103,15 +102,17 @@
             gap: 40px;
         }
 
-        /* --- CONTENT CARDS --- */
+        /* --- CONTENT CARDS WITH PARCHMENT WEBP TEXTURE --- */
         .content-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background-image: url('parchment.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             border-radius: 20px;
-            padding: 40px;
+            padding: 45px 40px;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(212, 199, 176, 0.4);
+            position: relative;
         }
 
         h2 {
@@ -142,7 +143,7 @@
             letter-spacing: 0.05em;
             margin: 35px 0 15px 0;
             padding-bottom: 6px;
-            border-bottom: 1px dashed rgba(74, 124, 89, 0.2);
+            border-bottom: 1px dashed rgba(74, 124, 89, 0.25);
         }
         .shelf-title:first-of-type { margin-top: 0; }
 
@@ -158,10 +159,10 @@
             grid-template-columns: 140px 1fr;
             gap: 25px;
             align-items: start;
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.4);
             padding: 20px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
             transition: transform 0.2s ease;
         }
 
@@ -171,8 +172,8 @@
 
         .book-cover-wrap {
             width: 100%;
-            box-shadow: 5px 8px 18px rgba(43, 54, 57, 0.15);
-            border-radius: 4px 12px 12px 4px;
+            box-shadow: 4px 6px 14px rgba(43, 54, 57, 0.18);
+            border-radius: 4px 10px 10px 4px;
             overflow: hidden;
             background: #cbd5e1;
         }
@@ -202,13 +203,14 @@
             font-style: italic;
             color: var(--accent);
             margin-bottom: 10px;
-            font-weight: 500;
+            font-weight: 600;
             line-height: 1.3;
         }
 
         .book-desc {
             font-size: 0.9rem;
-            color: var(--text-muted);
+            color: var(--text-main);
+            opacity: 0.95;
             margin-bottom: 18px;
         }
 
@@ -238,21 +240,21 @@
         }
 
         .pending-btn {
-            background-color: #e2e8f0;
-            color: #64748b;
+            background-color: rgba(35, 47, 62, 0.08);
+            color: #5a696c;
             cursor: not-allowed;
             box-shadow: none;
         }
-        .pending-btn:hover { background-color: #e2e8f0; }
+        .pending-btn:hover { background-color: rgba(35, 47, 62, 0.08); }
 
         .alt-markets-inline {
             display: flex;
             align-items: center;
             gap: 5px;
-            background: white;
+            background: rgba(255, 255, 255, 0.8);
             padding: 5px 10px;
             border-radius: 6px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(203, 213, 225, 0.5);
         }
 
         .alt-market-title {
@@ -274,7 +276,8 @@
             font-weight: 700;
             padding: 2px 5px;
             border-radius: 3px;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #cbd5e1;
+            background: white;
             transition: all 0.2s;
         }
 
@@ -287,15 +290,19 @@
         /* --- SIDEBAR NEWSLETTER --- */
         .newsletter-box {
             margin-top: auto;
-            background: rgba(255, 255, 255, 0.75);
-            border: 1px solid rgba(74, 124, 89, 0.15);
+            background-image: url('parchment.webp');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(212, 199, 176, 0.4);
             padding: 20px;
             border-radius: 16px;
+            box-shadow: var(--shadow);
         }
 
         .newsletter-box p {
             font-size: 0.85rem;
-            color: var(--text-muted);
+            color: var(--text-main);
+            opacity: 0.9;
             margin-bottom: 12px;
         }
 
@@ -312,7 +319,7 @@
             border: 1px solid #cbd5e1;
             font-size: 0.9rem;
             outline: none;
-            background: white;
+            background: rgba(255, 255, 255, 0.85);
         }
 
         button {
