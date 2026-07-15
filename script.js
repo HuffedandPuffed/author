@@ -1,54 +1,22 @@
-/* ==========================================================
-   COLIN BAMFORTH PORTFOLIO INTERACTION ENGINE
-========================================================== */
-
-const regionMap = {
-    'US': 'com', 'GB': 'co.uk', 'UK': 'co.uk', 'CA': 'ca', 
-    'AU': 'com.au', 'DE': 'de', 'FR': 'fr', 'JP': 'co.jp', 
-    'IN': 'in', 'BR': 'com.br', 'MX': 'com.mx'
-};
-
-async function runGeolocationEngine() {
-    let activeExtension = 'com';
-
-    try {
-        const response = await fetch('https://ipapi.co/json/');
-        if (response.ok) {
-            const data = await response.json();
-            const detectedCountry = data.country_code;
-            
-            if (regionMap[detectedCountry]) {
-                activeExtension = regionMap[detectedCountry];
-            }
-        }
-    } catch (error) {
-        console.log("Location engine safely defaulted to Amazon.com.");
-    }
-
-    const mainLinks = document.querySelectorAll('.amazon-link');
-    mainLinks.forEach(link => {
-        const asin = link.getAttribute('data-asin');
-        if (asin) {
-            link.href = `https://www.amazon.${activeExtension}/dp/${asin}`;
-        }
-    });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
-    runGeolocationEngine();
-
-    // Secure newsletter processing hooked directly to your free Cloudflare Worker
-    const newsletterForm = document.querySelector('.newsletter-box form');
+    // Finds your mailing list form automatically
+    const newsletterForm = document.querySelector('.newsletter-box form') || document.querySelector('form');
+    
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', async (event) => {
             event.preventDefault();
             const emailInput = newsletterForm.querySelector('input[type="email"]');
+            if (!emailInput) return;
+            
             const email = emailInput.value;
 
             try {
+                // Direct, secure connection to your specific Cloudflare Worker
                 const response = await fetch('https://boundtext-signup-engine.colin-533.workers.dev', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify({ email: email })
                 });
 
@@ -56,19 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Thanks for subscribing! Colin will be in touch with updates.');
                     newsletterForm.reset();
                 } else {
-                    alert('Something went wrong. Please try again.');
+                    alert('Something went wrong on the server. Please try again.');
                 }
             } catch (error) {
-                alert('Connection error. Please try again later.');
+                alert('Connection error. If you use an ad-blocker or privacy shield, please temporarily disable it for this site to test the subscription form.');
             }
         });
     }
-
-    const pendingButtons = document.querySelectorAll('.pending-btn');
-    pendingButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            alert('Release pending September 2026!');
-        });
-    });
 });
