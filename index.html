@@ -15,7 +15,7 @@
             --accent-orange: #ff5c26; /* Vibrant Blazing Orange */
             --accent-hover: #ff7849;
             --border-subtle: rgba(255, 255, 255, 0.05);
-            --orange-glow: rgba(255, 92, 38, 0.15);
+            --orange-glow: rgba(255, 92, 38, 0.2);
             --shadow-clean: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
@@ -147,7 +147,7 @@
         }
         .shelf-title:first-of-type { margin-top: 0; }
 
-        /* --- MODERN BOOK STRIPS --- */
+        /* --- MODERN BOOK STRIPS WITH ADVANCED HOVER GLOWS --- */
         .book-list {
             display: flex;
             flex-direction: column;
@@ -163,13 +163,18 @@
             padding: 30px;
             border-radius: 24px;
             border: 1px solid transparent;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            /* Smooth transitions for moving elements and changing glows */
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
+        /* Bold Orange Border + Radiating Ambient Aura Background Glow on Hover */
         .book-row:hover {
-            border-color: rgba(255, 92, 38, 0.2);
-            transform: translateY(-2px);
-            background: rgba(38, 43, 59, 0.4);
+            border-color: var(--accent-orange);
+            transform: translateY(-4px);
+            background: rgba(38, 43, 59, 0.5);
+            box-shadow: 
+                0 0 30px var(--orange-glow), 
+                0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
         .book-cover-wrap {
@@ -296,7 +301,7 @@
             color: var(--text-pure);
         }
 
-        /* --- CLEAN MAILING LIST BOX --- */
+        /* --- CLEAN MAILING LIST SUBSCRIBE BOX --- */
         .newsletter-box {
             background: var(--surface-panel);
             backdrop-filter: blur(24px);
@@ -350,7 +355,7 @@
         .submit-btn:hover {
             background-color: var(--accent-orange);
             color: var(--text-pure);
-            box-shadow: 0 5px 15px var(--orange-glow);
+            box-shadow: 0 5px 15px rgba(255, 92, 38, 0.3);
         }
 
         footer {
@@ -385,6 +390,7 @@
                 <p class="tagline">Author</p>
             </div>
 
+            <!-- Subscribe Box (Mailing List Block) -->
             <div class="newsletter-box">
                 <p>Subscribe for exclusive early updates and launch notifications.</p>
                 <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
