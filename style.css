@@ -26,12 +26,12 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     min-height: 100vh;
-    /* Ambient Glow + Clean Bulletproof Repeating Brand-Orange Wave Pattern */
+    /* Ambient Glow + Secure Multi-Layered Orange Topographic Contour Map Pattern */
     background-image: 
         radial-gradient(circle at 80% 10%, rgba(255, 92, 38, 0.08), transparent 50%),
         radial-gradient(circle at 20% 60%, rgba(255, 92, 38, 0.04), transparent 40%),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='30' viewBox='0 0 100 30'%3E%3Cpath d='M0 15 Q 25 0, 50 15 T 100 15' fill='none' stroke='rgba(255,92,38,0.06)' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-size: cover, cover, 100px 30px;
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' viewBox='0 0 300 300'%3E%3Cpath d='M0 50 Q 75 20, 150 75 T 300 50 M0 100 Q 80 130, 160 80 T 300 110 M0 160 Q 70 130, 145 180 T 300 150 M0 220 Q 90 250, 180 200 T 300 230 M0 270 Q 60 240, 130 290 T 300 260' fill='none' stroke='%23ff5c26' stroke-width='1.5' stroke-opacity='0.05' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-size: cover, cover, 300px 300px;
     background-repeat: no-repeat, no-repeat, repeat;
     background-attachment: fixed;
 }
