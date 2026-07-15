@@ -1,74 +1,113 @@
-/* ==========================================================
-   COLIN BAMFORTH PORTFOLIO INTERACTION ENGINE
-========================================================== */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colin Bamforth | Author Portfolio</title>
+    <!-- CUSTOM SVG MONOGRAM FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%230a0b0e'/><text x='50%' y='68%' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-weight='900' font-size='48' fill='%23ffffff' text-anchor='middle'>C<tspan fill='%23ff5c26'>B</tspan></text></svg>">
 
-const regionMap = {
-    'US': 'com', 'GB': 'co.uk', 'UK': 'co.uk', 'CA': 'ca', 
-    'AU': 'com.au', 'DE': 'de', 'FR': 'fr', 'JP': 'co.jp', 
-    'IN': 'in', 'BR': 'com.br', 'MX': 'com.mx'
-};
+    <link rel="stylesheet" href="style.css?v=7">
+    <!-- SECURE MASTER LAYOUT ASSETS -->
+    <link rel="stylesheet" href="style.css?v=8">
+    <script src="script.js" defer></script>
+</head>
+<body>
 
-async function runGeolocationEngine() {
-    let activeExtension = 'com';
+    <div class="wrapper">
 
-    try {
-        const response = await fetch('https://ipapi.co/json/');
-        if (response.ok) {
-            const data = await response.json();
-            const detectedCountry = data.country_code;
-            
-            if (regionMap[detectedCountry]) {
-                activeExtension = regionMap[detectedCountry];
-            }
-        }
-    } catch (error) {
-        console.log("Location engine safely defaulted to Amazon.com.");
-    }
+        <!-- FIXED LEFT COLUMN PANEL -->
+        <aside class="left-panel">
+            <div class="profile-section">
+                <div class="profile-frame">
+@@ -22,6 +25,7 @@
+                <p class="tagline">Author</p>
+            </div>
 
-    const mainLinks = document.querySelectorAll('.amazon-link');
-    mainLinks.forEach(link => {
-        const asin = link.getAttribute('data-asin');
-        if (asin) {
-            link.href = `https://www.amazon.${activeExtension}/dp/${asin}`;
-        }
-    });
-}
+            <!-- Subscribe Box (Mailing List Block) -->
+            <div class="newsletter-box">
+                <p>Subscribe for exclusive early updates and launch notifications.</p>
+                <form action="#">
+@@ -33,8 +37,10 @@
+            </div>
+        </aside>
 
-document.addEventListener('DOMContentLoaded', () => {
-    runGeolocationEngine();
+        <!-- SCROLLABLE RIGHT COLUMN STREAM -->
+        <main class="right-stream">
 
-    // Secure newsletter processing hooked directly to your free Cloudflare Worker
-    const newsletterForm = document.querySelector('.newsletter-box form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const emailInput = newsletterForm.querySelector('input[type="email"]');
-            const email = emailInput.value;
+            <!-- Biography Card -->
+            <section class="content-card bio-card">
+                <h2>About Colin</h2>
+                <p class="bio-lead">
+@@ -45,12 +51,14 @@
+                </p>
+            </section>
 
-            try {
-                const response = await fetch('https://boundtext-signup-engine.colin-533.workers.dev', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email })
-                });
+            <!-- Book Library Showcase Card -->
+            <section class="content-card">
+                <h2>The Library</h2>
+                <div class="book-list">
 
-                if (response.ok) {
-                    alert('Thanks for subscribing! Colin will be in touch with updates.');
-                    newsletterForm.reset();
-                } else {
-                    alert('Something went wrong. Please try again.');
-                }
-            } catch (error) {
-                alert('Connection error. Please try again later.');
-            }
-        });
-    }
+                    <div class="shelf-title">International Thriller & Fiction</div>
 
-    const pendingButtons = document.querySelectorAll('.pending-btn');
-    pendingButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            alert('Release pending September 2026!');
-        });
-    });
-});
+                    <!-- Book 1: Standard Operating Silence -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="standard-operating-silence.webp" alt="Standard Operating Silence Cover">
+@@ -67,6 +75,7 @@
+                        </div>
+                    </div>
+
+                    <!-- Book 2: Shift Change -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="shift-change.webp" alt="Shift Change Cover">
+@@ -94,6 +103,7 @@
+
+                    <div class="shelf-title">Self-Help & Wellness</div>
+
+                    <!-- Book 3: Overwhelmed by Stress (US) -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="overwhelmed-by-stress-us.webp" alt="Overwhelmed by Stress US Cover">
+@@ -119,6 +129,7 @@
+                        </div>
+                    </div>
+
+                    <!-- Book 4: Overwhelmed by Stress (AU/NZ) -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="overwhelmed-by-stress-au-nz.webp" alt="Overwhelmed by Stress AU NZ Cover">
+@@ -134,7 +145,7 @@
+                                <div class="alt-markets-inline">
+                                    <span class="alt-market-title">Gifting:</span>
+                                    <div class="alt-market-links">
+                                        <a href="https://www.amazon.com/dp/B0FFSLSV2G" target="_blank">US</a>
+                                        <a href="https://www.amazon.com.au/dp/B0FFSLSV2G" target="_blank">US</a>
+                                        <a href="https://www.amazon.co.uk/dp/B0FFSLSV2G" target="_blank">UK</a>
+                                        <a href="https://www.amazon.ca/dp/B0FFSLSV2G" target="_blank">CA</a>
+                                        <a href="https://www.amazon.com.au/dp/B0FFSLSV2G" target="_blank">AU</a>
+@@ -146,6 +157,7 @@
+
+                    <div class="shelf-title">Brain Training & Puzzle Books</div>
+
+                    <!-- Book 5: Motorcycle Word Search -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="motorcycle-word-search.webp" alt="Motorcycle Word Search Cover">
+@@ -171,6 +183,7 @@
+                        </div>
+                    </div>
+
+                    <!-- Book 6: Construction Word Search -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="construction-word-search.webp" alt="Construction Word Search Cover">
+@@ -196,6 +209,7 @@
+                        </div>
+                    </div>
+
+                    <!-- Book 7: Fishing Word Search -->
+                    <div class="book-row">
+                        <div class="book-cover-wrap">
+                            <img src="fishing-word-search.webp" alt="Fishing Word Search Cover">
