@@ -115,6 +115,19 @@
             border: 1px solid var(--border-subtle);
         }
 
+        /* Interactive Hover State for the About Card */
+        .bio-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bio-card:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-4px);
+            box-shadow: 
+                0 0 30px var(--orange-glow), 
+                0 20px 40px rgba(0, 0, 0, 0.6);
+        }
+
         h2 {
             font-size: 1.8rem;
             margin-bottom: 30px;
@@ -163,11 +176,9 @@
             padding: 30px;
             border-radius: 24px;
             border: 1px solid transparent;
-            /* Smooth transitions for moving elements and changing glows */
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Bold Orange Border + Radiating Ambient Aura Background Glow on Hover */
         .book-row:hover {
             border-color: var(--accent-orange);
             transform: translateY(-4px);
@@ -227,7 +238,6 @@
             flex-wrap: wrap;
         }
 
-        /* High-Contrast Blazing Orange Action Pill Buttons */
         .amazon-btn {
             background-color: var(--accent-orange);
             color: var(--text-pure);
@@ -309,6 +319,16 @@
             padding: 30px;
             border-radius: 28px;
             box-shadow: var(--shadow-clean);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Interactive Hover State for the Newsletter Box */
+        .newsletter-box:hover {
+            border-color: var(--accent-orange);
+            transform: translateY(-4px);
+            box-shadow: 
+                0 0 30px var(--orange-glow), 
+                0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
         .newsletter-box p {
@@ -406,7 +426,7 @@
         <main class="right-stream">
             
             <!-- Biography Card -->
-            <section class="content-card">
+            <section class="content-card bio-card">
                 <h2>About Colin</h2>
                 <p style="font-size: 1.05rem; color: var(--text-pure); opacity: 0.9; margin-bottom: 16px; font-weight: 400;">
                     Welcome! I'm Colin, an author driven by exploring the spaces where real-world human experience intersects with compelling structure. Drawing on nearly 40 years of paramedic experience across New Zealand, Australia, and the UK, my writing navigates intense frontline realities, human resilience, and the critical systems that support personal recovery.
@@ -531,7 +551,7 @@
                             <div>
                                 <div class="book-title">Motorcycle Word Search</div>
                                 <div class="book-subtitle">A themed word-search collection for motorcycle enthusiasts</div>
-                                <div class="book-desc">A themed word-search collection for motorcycle enthusiasts, built for relaxed concentration and easy gifting. Perfect for riders who enjoy clear layout print sheets and active focus breaks.</div>
+                                to provide relaxed concentration and easy gifting. Perfect for riders who enjoy clear layout print sheets and active focus breaks.
                             </div>
                             <div class="purchase-actions">
                                 <a href="https://www.amazon.com/dp/B0F5QCYXNP" target="_blank" class="amazon-link amazon-btn" data-asin="B0F5QCYXNP">Buy Locally ➔</a>
@@ -557,7 +577,7 @@
                             <div>
                                 <div class="book-title">Construction Word Search</div>
                                 <div class="book-subtitle">A construction-themed puzzle book</div>
-                                <div class="book-desc">A construction-themed puzzle book for readers who enjoy site language, tools, trades, and a satisfying pencil-and-paper break. Excellent cross-generational layout engine design built for crisp, clear visual puzzle tracking.</div>
+                                for readers who enjoy site language, tools, trades, and a satisfying pencil-and-paper break. Excellent cross-generational layout engine design built for crisp, clear visual puzzle tracking.
                             </div>
                             <div class="purchase-actions">
                                 <a href="https://www.amazon.com/dp/B0F5QVCCJ7" target="_blank" class="amazon-link amazon-btn" data-asin="B0F5QVCCJ7">Buy Locally ➔</a>
