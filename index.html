@@ -1,113 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Colin Bamforth | Author Portfolio</title>
-    <!-- CUSTOM SVG MONOGRAM FAVICON -->
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%230a0b0e'/><text x='50%' y='68%' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-weight='900' font-size='48' fill='%23ffffff' text-anchor='middle'>C<tspan fill='%23ff5c26'>B</tspan></text></svg>">
-
-    <link rel="stylesheet" href="style.css?v=7">
-    <!-- SECURE MASTER LAYOUT ASSETS -->
-    <link rel="stylesheet" href="style.css?v=8">
-<script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colin Bamforth | Author Portfolio</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="wrapper">
+    <div class="container">
+        <!-- Sidebar Navigation & Profile Section -->
+        <aside class="sidebar">
+            <div class="profile-box">
+                <img src="Colin.webp" alt="Colin Bamforth" class="profile-img">
+                <h1 class="nav-title">AUTHOR</h1>
+            </div>
 
-        <!-- FIXED LEFT COLUMN PANEL -->
-<aside class="left-panel">
-<div class="profile-section">
-<div class="profile-frame">
-@@ -22,6 +25,7 @@
-<p class="tagline">Author</p>
-</div>
+            <!-- Email Newsletter Sign-up Box -->
+            <div class="newsletter-box">
+                <p>Subscribe for exclusive early updates and launch notifications.</p>
+                <form>
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </aside>
 
-            <!-- Subscribe Box (Mailing List Block) -->
-<div class="newsletter-box">
-<p>Subscribe for exclusive early updates and launch notifications.</p>
-<form action="#">
-@@ -33,8 +37,10 @@
-</div>
-</aside>
+        <!-- Main Content Showcase -->
+        <main class="main-content">
+            
+            <!-- Section 1: Features & Narrative Non-Fiction -->
+            <section class="book-section">
+                <div class="book-card">
+                    <img src="shift-change.webp" alt="Shift Change: A Paramedic's Story" class="book-cover">
+                    <div class="book-info">
+                        <h3>Shift Change</h3>
+                        <p>A Paramedic's Story</p>
+                        <!-- Replace data-asin with your real Amazon ASIN if different -->
+                        <a href="#" class="amazon-link" data-asin="B0CB123456">Buy on Amazon</a>
+                    </div>
+                </div>
+            </section>
 
-        <!-- SCROLLABLE RIGHT COLUMN STREAM -->
-<main class="right-stream">
+            <!-- Section 2: Self-Help & Wellness -->
+            <h2 class="category-title">SELF-HELP & WELLNESS</h2>
+            <section class="book-grid">
+                <div class="book-card">
+                    <img src="overwhelmed-by-stress-us.webp" alt="Overwhelmed by Stress? - US Edition" class="book-cover">
+                    <div class="book-info">
+                        <h3>Overwhelmed by Stress?</h3>
+                        <p>US Edition</p>
+                        <a href="#" class="amazon-link" data-asin="B0CB789101">Buy on Amazon</a>
+                    </div>
+                </div>
 
-            <!-- Biography Card -->
-<section class="content-card bio-card">
-<h2>About Colin</h2>
-<p class="bio-lead">
-@@ -45,12 +51,14 @@
-</p>
-</section>
+                <div class="book-card">
+                    <img src="overwhelmed-by-stress-au-nz.webp" alt="Overwhelmed by Stress? - AU/NZ Edition" class="book-cover">
+                    <div class="book-info">
+                        <h3>Overwhelmed by Stress?</h3>
+                        <p>AU/NZ Edition</p>
+                        <a href="#" class="amazon-link" data-asin="B0CB112131">Buy on Amazon</a>
+                    </div>
+                </div>
+            </section>
 
-            <!-- Book Library Showcase Card -->
-<section class="content-card">
-<h2>The Library</h2>
-<div class="book-list">
+            <!-- Section 3: Upcoming Releases & Puzzles -->
+            <h2 class="category-title">THRILLERS & PUZZLES</h2>
+            <section class="book-grid">
+                <div class="book-card">
+                    <img src="standard-operating-silence.webp" alt="Standard Operating Silence" class="book-cover">
+                    <div class="book-info">
+                        <h3>Standard Operating Silence</h3>
+                        <p>Fiction Thriller</p>
+                        <a href="#" class="pending-btn">Pre-Order Pending</a>
+                    </div>
+                </div>
 
-<div class="shelf-title">International Thriller & Fiction</div>
+                <div class="book-card">
+                    <img src="construction-word-search.webp" alt="Word Search on Construction" class="book-cover">
+                    <div class="book-info">
+                        <h3>Construction Word Search</h3>
+                        <a href="#" class="amazon-link" data-asin="B0CB314151">Buy on Amazon</a>
+                    </div>
+                </div>
 
-                    <!-- Book 1: Standard Operating Silence -->
-<div class="book-row">
-<div class="book-cover-wrap">
-<img src="standard-operating-silence.webp" alt="Standard Operating Silence Cover">
-@@ -67,6 +75,7 @@
-</div>
-</div>
+                <div class="book-card">
+                    <img src="fishing-word-search.webp" alt="Fishing Word Search" class="book-cover">
+                    <div class="book-info">
+                        <h3>Fishing Word Search</h3>
+                        <a href="#" class="amazon-link" data-asin="B0CB161718">Buy on Amazon</a>
+                    </div>
+                </div>
 
-                    <!-- Book 2: Shift Change -->
-<div class="book-row">
-<div class="book-cover-wrap">
-<img src="shift-change.webp" alt="Shift Change Cover">
-@@ -94,6 +103,7 @@
+                <div class="book-card">
+                    <img src="motorcycle-word-search.webp" alt="Motorcycle Word Search" class="book-cover">
+                    <div class="book-info">
+                        <h3>Motorcycle Word Search</h3>
+                        <a href="#" class="amazon-link" data-asin="B0CB192021">Buy on Amazon</a>
+                    </div>
+                </div>
+            </section>
 
-<div class="shelf-title">Self-Help & Wellness</div>
+        </main>
+    </div>
 
-                    <!-- Book 3: Overwhelmed by Stress (US) -->
-<div class="book-row">
-<div class="book-cover-wrap">
-<img src="overwhelmed-by-stress-us.webp" alt="Overwhelmed by Stress US Cover">
-@@ -119,6 +129,7 @@
-</div>
-</div>
-
-                    <!-- Book 4: Overwhelmed by Stress (AU/NZ) -->
-<div class="book-row">
-<div class="book-cover-wrap">
-<img src="overwhelmed-by-stress-au-nz.webp" alt="Overwhelmed by Stress AU NZ Cover">
-@@ -134,7 +145,7 @@
-<div class="alt-markets-inline">
-<span class="alt-market-title">Gifting:</span>
-<div class="alt-market-links">
-                                        <a href="https://www.amazon.com/dp/B0FFSLSV2G" target="_blank">US</a>
-                                        <a href="https://www.amazon.com.au/dp/B0FFSLSV2G" target="_blank">US</a>
-<a href="https://www.amazon.co.uk/dp/B0FFSLSV2G" target="_blank">UK</a>
-<a href="https://www.amazon.ca/dp/B0FFSLSV2G" target="_blank">CA</a>
-<a href="https://www.amazon.com.au/dp/B0FFSLSV2G" target="_blank">AU</a>
-@@ -146,6 +157,7 @@
-
-<div class="shelf-title">Brain Training & Puzzle Books</div>
-
-                    <!-- Book 5: Motorcycle Word Search -->
-<div class="book-row">
-<div class="book-cover-wrap">
-<img src="motorcycle-word-search.webp" alt="Motorcycle Word Search Cover">
-@@ -171,6 +183,7 @@
-</div>
-</div>
-
-                    <!-- Book 6: Construction Word Search -->
-<div class="book-row">
-<div class="book-cover-wrap">
-<img src="construction-word-search.webp" alt="Construction Word Search Cover">
-@@ -196,6 +209,7 @@
-</div>
-</div>
-
-                    <!-- Book 7: Fishing Word Search -->
-<div class="book-row">
-<div class="book-cover-wrap">
-<img src="fishing-word-search.webp" alt="Fishing Word Search Cover">
+    <!-- Active Script Hook -->
+    <script src="script.js"></script>
+</body>
+</html>
