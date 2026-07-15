@@ -34,22 +34,36 @@ async function runGeolocationEngine() {
     });
 }
 
-// Bind event listeners dynamically once the DOM is secure and painted
 document.addEventListener('DOMContentLoaded', () => {
-    // Run the local marketplace routing engine
     runGeolocationEngine();
 
-    // Securely handle form submission without inline HTML attributes
+    // Secure newsletter processing hooked directly to your free Cloudflare Worker
     const newsletterForm = document.querySelector('.newsletter-box form');
     if (newsletterForm) {
-        newsletterForm.addEventListener('submit', (event) => {
+        newsletterForm.addEventListener('submit', async (event) => {
             event.preventDefault();
-            alert('Thank you for subscribing!');
-            newsletterForm.reset();
+            const emailInput = newsletterForm.querySelector('input[type="email"]');
+            const email = emailInput.value;
+
+            try {
+                const response = await fetch('https://boundtext-signup-engine.colin-533.workers.dev', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email })
+                });
+
+                if (response.ok) {
+                    alert('Thanks for subscribing! Colin will be in touch with updates.');
+                    newsletterForm.reset();
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            } catch (error) {
+                alert('Connection error. Please try again later.');
+            }
         });
     }
 
-    // Securely handle notice popups for unreleased books
     const pendingButtons = document.querySelectorAll('.pending-btn');
     pendingButtons.forEach(button => {
         button.addEventListener('click', (event) => {
