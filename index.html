@@ -5,13 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colin Bamforth | Author Portfolio</title>
     <style>
-        /* --- DESIGN SYSTEM & COLORS --- */
+        /* --- HIGH-END DARK CONTEMPORARY DESIGN SYSTEM --- */
         :root {
-            --text-main: #2b3639;
-            --text-muted: #5a696c;
-            --accent: #4a7c59; /* Classic Sage Green */
-            --accent-light: rgba(74, 124, 89, 0.1);
-            --shadow: 0 12px 30px rgba(43, 54, 57, 0.08);
+            --bg-base: #0a0b0e;
+            --surface-panel: rgba(18, 20, 26, 0.75);
+            --surface-inner: rgba(28, 32, 43, 0.5);
+            --text-pure: #ffffff;
+            --text-muted: #8e9aa8;
+            --accent-orange: #ff5c26; /* Vibrant Blazing Orange */
+            --accent-hover: #ff7849;
+            --border-subtle: rgba(255, 255, 255, 0.05);
+            --orange-glow: rgba(255, 92, 38, 0.15);
+            --shadow-clean: 0 20px 40px rgba(0, 0, 0, 0.4);
         }
 
         * {
@@ -19,34 +24,35 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
+        /* Ambient Lighting Atmospheric Effect */
         body {
-            color: var(--text-main);
+            background-color: var(--bg-base);
+            color: var(--text-pure);
             line-height: 1.6;
             overflow-x: hidden;
             min-height: 100vh;
-            background-image: linear-gradient(rgba(247, 246, 243, 0.93), rgba(247, 246, 243, 0.93)), 
-                              url('https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1920&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+            background-image: 
+                radial-gradient(circle at 80% 10%, rgba(255, 92, 38, 0.08), transparent 50%),
+                radial-gradient(circle at 20% 60%, rgba(255, 92, 38, 0.04), transparent 40%);
             background-attachment: fixed;
-            background-repeat: no-repeat;
         }
 
         /* --- ASYMMETRICAL WRAPPER GRID --- */
         .wrapper {
             display: grid;
-            grid-template-columns: 380px 1fr;
+            grid-template-columns: 400px 1fr;
             min-height: 100vh;
-            max-width: 1300px;
+            max-width: 1350px;
             margin: 0 auto;
             position: relative;
         }
 
-        /* --- LEFT FIXED PANEL --- */
+        /* --- LEFT PANEL ANCHOR --- */
         .left-panel {
-            padding: 60px 40px;
+            padding: 70px 50px;
             position: sticky;
             top: 0;
             height: 100vh;
@@ -55,19 +61,15 @@
             justify-content: space-between;
         }
 
-        .profile-section {
-            text-align: left;
-        }
-
+        /* Clean Profile Square with Large Corner Radius */
         .profile-frame {
-            width: 140px;
-            height: 140px;
-            border-radius: 24px 4px 24px 24px;
-            box-shadow: var(--shadow);
-            border: 4px solid white;
+            width: 130px;
+            height: 130px;
+            border-radius: 28px;
             overflow: hidden;
-            margin-bottom: 25px;
-            background-color: #cbd5e1;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .profile-frame img {
@@ -77,105 +79,105 @@
         }
 
         h1 {
-            font-size: 2.4rem;
-            color: #1c2426;
-            line-height: 1.2;
-            margin-bottom: 6px;
+            font-size: 2.8rem;
+            color: var(--text-pure);
+            line-height: 1.1;
+            margin-bottom: 8px;
             font-weight: 800;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.03em;
         }
 
         .tagline {
-            font-size: 1.1rem;
-            color: var(--accent);
-            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--accent-orange);
+            font-weight: 700;
             margin-bottom: 20px;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
         }
 
-        /* --- RIGHT SCROLLABLE STREAM --- */
+        /* --- RIGHT CONTENT STREAM --- */
         .right-stream {
-            padding: 60px 60px 60px 40px;
+            padding: 70px 70px 70px 20px;
             display: flex;
             flex-direction: column;
             gap: 40px;
         }
 
-        /* --- CONTENT CARDS WITH PARCHMENT WEBP TEXTURE --- */
+        /* Sleek Modern Glassmorphic Box Panels */
         .content-card {
-            background-image: url('parchment.webp');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 20px;
-            padding: 45px 40px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(212, 199, 176, 0.4);
-            position: relative;
+            background: var(--surface-panel);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-radius: 32px;
+            padding: 50px;
+            box-shadow: var(--shadow-clean);
+            border: 1px solid var(--border-subtle);
         }
 
         h2 {
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            letter-spacing: 0.02em;
-            text-transform: uppercase;
-            font-weight: 700;
-            color: #1c2426;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+            font-weight: 800;
+            color: var(--text-pure);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         h2::before {
             content: '';
-            width: 8px;
-            height: 8px;
-            background-color: var(--accent);
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent-orange);
             border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-orange);
         }
 
         .shelf-title {
-            font-size: 1.1rem;
-            color: var(--accent);
+            font-size: 0.85rem;
+            color: var(--accent-orange);
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin: 35px 0 15px 0;
-            padding-bottom: 6px;
-            border-bottom: 1px dashed rgba(74, 124, 89, 0.25);
+            letter-spacing: 0.15em;
+            margin: 40px 0 20px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         .shelf-title:first-of-type { margin-top: 0; }
 
-        /* --- ASYMMETRICAL BOOK ROW DISPLAY --- */
+        /* --- MODERN BOOK STRIPS --- */
         .book-list {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 24px;
         }
 
         .book-row {
             display: grid;
-            grid-template-columns: 140px 1fr;
-            gap: 25px;
+            grid-template-columns: 130px 1fr;
+            gap: 35px;
             align-items: start;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 20px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.5);
-            transition: transform 0.2s ease;
+            background: var(--surface-inner);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .book-row:hover {
+            border-color: rgba(255, 92, 38, 0.2);
             transform: translateY(-2px);
+            background: rgba(38, 43, 59, 0.4);
         }
 
         .book-cover-wrap {
             width: 100%;
-            box-shadow: 4px 6px 14px rgba(43, 54, 57, 0.18);
-            border-radius: 4px 10px 10px 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border-radius: 6px;
             overflow: hidden;
-            background: #cbd5e1;
+            border: 1px solid rgba(255,255,255,0.05);
         }
 
         .book-cover-wrap img {
@@ -192,164 +194,179 @@
         }
 
         .book-title {
-            font-size: 1.25rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            color: #1c2426;
+            color: var(--text-pure);
             margin-bottom: 4px;
+            letter-spacing: -0.01em;
         }
 
         .book-subtitle {
-            font-size: 0.88rem;
-            font-style: italic;
-            color: var(--accent);
-            margin-bottom: 10px;
-            font-weight: 600;
-            line-height: 1.3;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            line-height: 1.4;
         }
 
         .book-desc {
-            font-size: 0.9rem;
-            color: var(--text-main);
-            opacity: 0.95;
-            margin-bottom: 18px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            line-height: 1.6;
         }
 
         .purchase-actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             flex-wrap: wrap;
         }
 
+        /* High-Contrast Blazing Orange Action Pill Buttons */
         .amazon-btn {
-            background-color: #232f3e;
-            color: #ffa41c;
+            background-color: var(--accent-orange);
+            color: var(--text-pure);
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            transition: background 0.2s;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            box-shadow: 0 3px 8px rgba(35, 47, 62, 0.1);
+            box-shadow: 0 4px 15px rgba(255, 92, 38, 0.25);
         }
 
         .amazon-btn:hover {
-            background-color: #131a22;
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 92, 38, 0.4);
         }
 
         .pending-btn {
-            background-color: rgba(35, 47, 62, 0.08);
-            color: #5a696c;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.4);
             cursor: not-allowed;
             box-shadow: none;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .pending-btn:hover { background-color: rgba(35, 47, 62, 0.08); }
+        .pending-btn:hover { 
+            background-color: rgba(255, 255, 255, 0.05); 
+            transform: none; 
+            box-shadow: none; 
+        }
 
+        /* Modern Marketplace Inline Badges */
         .alt-markets-inline {
             display: flex;
             align-items: center;
-            gap: 5px;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 5px 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(203, 213, 225, 0.5);
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .alt-market-title {
-            font-size: 0.72rem;
+            font-size: 0.75rem;
             font-weight: 600;
             color: var(--text-muted);
-            margin-right: 2px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .alt-market-links {
             display: flex;
-            gap: 4px;
+            gap: 6px;
         }
 
         .alt-market-links a {
-            font-size: 0.72rem;
-            color: #232f3e;
+            font-size: 0.75rem;
+            color: var(--text-pure);
             text-decoration: none;
             font-weight: 700;
-            padding: 2px 5px;
-            border-radius: 3px;
-            border: 1px solid #cbd5e1;
-            background: white;
-            transition: all 0.2s;
+            padding: 3px 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
         }
 
         .alt-market-links a:hover {
-            background: var(--accent-light);
-            border-color: var(--accent);
-            color: var(--accent);
+            background: var(--accent-orange);
+            color: var(--text-pure);
         }
 
-        /* --- SIDEBAR NEWSLETTER --- */
+        /* --- CLEAN MAILING LIST BOX --- */
         .newsletter-box {
-            margin-top: auto;
-            background-image: url('parchment.webp');
-            background-size: cover;
-            background-position: center;
-            border: 1px solid rgba(212, 199, 176, 0.4);
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
+            background: var(--surface-panel);
+            backdrop-filter: blur(24px);
+            border: 1px solid var(--border-subtle);
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: var(--shadow-clean);
         }
 
         .newsletter-box p {
-            font-size: 0.85rem;
-            color: var(--text-main);
-            opacity: 0.9;
-            margin-bottom: 12px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         input[type="email"] {
             width: 100%;
-            padding: 10px 14px;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-            font-size: 0.9rem;
+            padding: 14px 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.95rem;
             outline: none;
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-pure);
+            transition: all 0.2s;
         }
 
-        button {
-            background-color: var(--accent);
-            color: white;
+        input[type="email"]:focus {
+            border-color: var(--accent-orange);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .submit-btn {
+            background-color: var(--text-pure);
+            color: var(--bg-base);
             border: none;
-            padding: 10px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 14px;
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
         }
 
-        button:hover { background-color: #3b6347; }
+        .submit-btn:hover {
+            background-color: var(--accent-orange);
+            color: var(--text-pure);
+            box-shadow: 0 5px 15px var(--orange-glow);
+        }
 
         footer {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            padding-top: 20px;
-            border-top: 1px solid rgba(0,0,0,0.05);
+            padding-top: 10px;
         }
 
-        @media(max-width: 900px) {
+        /* Responsive Flow Adjustments for Mobile Viewports */
+        @media(max-width: 950px) {
             .wrapper { grid-template-columns: 1fr; }
-            .left-panel { position: relative; height: auto; padding: 40px 20px 20px; }
-            .right-stream { padding: 20px; }
-            .newsletter-box { margin-top: 30px; }
-            .book-row { grid-template-columns: 1fr; justify-items: center; text-align: center; }
-            .book-cover-wrap { width: 130px; margin-bottom: 12px; }
+            .left-panel { position: relative; height: auto; padding: 50px 30px 10px; }
+            .right-stream { padding: 30px 30px 50px 30px; }
+            .newsletter-box { margin-top: 20px; }
+            .book-row { grid-template-columns: 1fr; justify-items: center; text-align: center; gap: 20px; }
+            .book-cover-wrap { width: 140px; }
             .purchase-actions { justify-content: center; }
         }
     </style>
@@ -369,11 +386,11 @@
             </div>
 
             <div class="newsletter-box">
-                <p>Subscribe for exclusive early-access updates and new book releases.</p>
+                <p>Subscribe for exclusive early updates and launch notifications.</p>
                 <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
                     <div class="form-group">
-                        <input type="email" placeholder="Your email address..." required>
-                        <button type="submit">Join Mailing List</button>
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit" class="submit-btn">Join Mailing List</button>
                     </div>
                 </form>
             </div>
@@ -385,10 +402,10 @@
             <!-- Biography Card -->
             <section class="content-card">
                 <h2>About Colin</h2>
-                <p style="font-size: 0.98rem; color: var(--text-main); margin-bottom: 12px;">
+                <p style="font-size: 1.05rem; color: var(--text-pure); opacity: 0.9; margin-bottom: 16px; font-weight: 400;">
                     Welcome! I'm Colin, an author driven by exploring the spaces where real-world human experience intersects with compelling structure. Drawing on nearly 40 years of paramedic experience across New Zealand, Australia, and the UK, my writing navigates intense frontline realities, human resilience, and the critical systems that support personal recovery.
                 </p>
-                <p style="font-size: 0.98rem; color: var(--text-main);">
+                <p style="font-size: 1.05rem; color: var(--text-muted); font-weight: 400;">
                     My work crosses distinct spaces—from tension-filled hospital thrillers and illuminating fictional biographies to science-backed stress-management frameworks designed to bring clinical strategies out into everyday life. Across all my projects, I value delivering professional, authoritative depth balanced with a friendly, welcoming, and open narrative voice. Take a look around my library shelves below, and join the mailing list so we can share the next chapter together.
                 </p>
             </section>
