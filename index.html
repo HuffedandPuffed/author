@@ -664,8 +664,9 @@
 
             const mainLinks = document.querySelectorAll('.amazon-link');
             mainLinks.forEach(link => {
-                const asin = link.getAttribute('data-asin');
-                if (asin) {
+                const rawAsin = link.getAttribute('data-asin');
+                const asin = rawAsin ? rawAsin.trim().toUpperCase() : '';
+                if (/^[A-Z0-9]{10}$/.test(asin)) {
                     link.href = `https://www.amazon.${activeExtension}/dp/${asin}`;
                 }
             });
