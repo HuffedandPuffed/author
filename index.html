@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Colin Bamforth | Author Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <!-- CUSTOM SVG MONOGRAM FAVICON (Overrides the ghost WordPress icon) -->
+    <!-- CUSTOM SVG MONOGRAM FAVICON -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%230a0b0e'/><text x='50%' y='68%' font-family='-apple-system, BlinkMacSystemFont, sans-serif' font-weight='900' font-size='48' fill='%23ffffff' text-anchor='middle'>C<tspan fill='%23ff5c26'>B</tspan></text></svg>">
     
     <style>
@@ -31,7 +31,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Ambient Lighting Atmospheric Effect + Zero-Lag Premium Texturing */
         body {
             background-color: var(--bg-base);
             color: var(--text-pure);
@@ -45,7 +44,6 @@
             background-attachment: fixed;
         }
 
-        /* --- ASYMMETRICAL WRAPPER GRID --- */
         .wrapper {
             display: grid;
             grid-template-columns: 400px 1fr;
@@ -55,7 +53,6 @@
             position: relative;
         }
 
-        /* --- LEFT PANEL ANCHOR --- */
         .left-panel {
             padding: 70px 50px;
             position: sticky;
@@ -66,7 +63,6 @@
             justify-content: space-between;
         }
 
-        /* Clean Profile Square with Large Corner Radius */
         .profile-frame {
             width: 130px;
             height: 130px;
@@ -101,7 +97,6 @@
             text-transform: uppercase;
         }
 
-        /* --- RIGHT CONTENT STREAM --- */
         .right-stream {
             padding: 70px 70px 70px 20px;
             display: flex;
@@ -109,7 +104,6 @@
             gap: 40px;
         }
 
-        /* Sleek Modern Glassmorphic Box Panels */
         .content-card {
             background: var(--surface-panel);
             backdrop-filter: blur(24px);
@@ -120,7 +114,6 @@
             border: 1px solid var(--border-subtle);
         }
 
-        /* Interactive Hover State for the About Card */
         .bio-card {
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -165,7 +158,6 @@
         }
         .shelf-title:first-of-type { margin-top: 0; }
 
-        /* --- MODERN BOOK STRIPS WITH ADVANCED HOVER GLOWS --- */
         .book-list {
             display: flex;
             flex-direction: column;
@@ -239,13 +231,27 @@
         .isbn-note {
             font-size: 0.85rem;
             color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .direct-signed-box {
+            background: rgba(255, 92, 38, 0.08);
+            border: 1px solid rgba(255, 92, 38, 0.25);
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            color: var(--text-pure);
             margin-bottom: 16px;
+        }
+
+        .direct-signed-box strong {
+            color: var(--accent-orange);
         }
 
         .purchase-actions {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
         }
 
@@ -253,7 +259,7 @@
             background-color: var(--accent-orange);
             color: var(--text-pure);
             text-decoration: none;
-            padding: 12px 28px;
+            padding: 12px 24px;
             border-radius: 30px;
             font-size: 0.9rem;
             font-weight: 700;
@@ -269,20 +275,27 @@
             box-shadow: 0 6px 20px rgba(255, 92, 38, 0.4);
         }
 
-        .pending-btn {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.4);
-            cursor: not-allowed;
-            box-shadow: none;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .pending-btn:hover { 
-            background-color: rgba(255, 255, 255, 0.05); 
-            transform: none; 
-            box-shadow: none; 
+        .signed-btn {
+            background-color: transparent;
+            color: var(--text-pure);
+            border: 1px solid var(--accent-orange);
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
         }
 
-        /* Modern Marketplace Inline Badges */
+        .signed-btn:hover {
+            background-color: var(--accent-orange);
+            color: var(--text-pure);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(255, 92, 38, 0.3);
+        }
+
         .alt-markets-inline {
             display: flex;
             align-items: center;
@@ -322,7 +335,6 @@
             color: var(--text-pure);
         }
 
-        /* --- CLEAN MAILING LIST SUBSCRIBE BOX --- */
         .newsletter-box {
             background: var(--surface-panel);
             backdrop-filter: blur(24px);
@@ -333,7 +345,6 @@
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* Interactive Hover State for the Newsletter Box */
         .newsletter-box:hover {
             border-color: var(--accent-orange);
             transform: translateY(-4px);
@@ -395,7 +406,6 @@
             padding-top: 10px;
         }
 
-        /* Responsive Flow Adjustments for Mobile Viewports */
         @media(max-width: 950px) {
             .wrapper { grid-template-columns: 1fr; }
             .left-panel { position: relative; height: auto; padding: 50px 30px 10px; }
@@ -411,7 +421,6 @@
 
     <div class="wrapper">
         
-        <!-- FIXED LEFT COLUMN PANEL -->
         <aside class="left-panel">
             <div class="profile-section">
                 <div class="profile-frame">
@@ -421,7 +430,6 @@
                 <p class="tagline">Author</p>
             </div>
 
-            <!-- Subscribe Box (Mailing List Block) -->
             <div class="newsletter-box">
                 <p>Subscribe for exclusive early updates and launch notifications.</p>
                 <form action="#" method="POST" onsubmit="alert('Thank you for subscribing!'); return false;">
@@ -433,10 +441,8 @@
             </div>
         </aside>
 
-        <!-- SCROLLABLE RIGHT COLUMN STREAM -->
         <main class="right-stream">
             
-            <!-- Biography Card -->
             <section class="content-card bio-card">
                 <h2>About Colin</h2>
                 <p style="font-size: 1.05rem; color: var(--text-pure); opacity: 0.9; margin-bottom: 16px; font-weight: 400;">
@@ -447,7 +453,6 @@
                 </p>
             </section>
 
-            <!-- Book Library Showcase Card -->
             <section class="content-card">
                 <h2>The Library</h2>
                 <div class="book-list">
@@ -465,9 +470,13 @@
                                 <div class="book-subtitle">"The truth was never meant to survive."</div>
                                 <div class="book-desc">Former reconnaissance soldier, paramedic, and clinical educator Raf Rodriguez is used to trauma, chaos, and pressure. When unrelated incidents begin to overlap, altered reports and missing details point toward a conspiracy protected by procedure. A gripping thriller of emergency medicine, law enforcement, institutional self-interest, and the danger of asking the wrong questions.</div>
                                 <div class="isbn-note"><strong>ISBN:</strong> 978-1067101077 &mdash; Order from your local bookshop</div>
+                                <div class="direct-signed-box">
+                                    <strong>Signed Copies Direct:</strong> Email <a href="mailto:contact@boundtext.com?subject=Signed%20Copy%20Request%20-%20Standard%20Operating%20Silence" style="color: var(--accent-orange); text-decoration: underline;">contact@boundtext.com</a> to arrange a direct author-signed copy. Payment accepted via direct bank transfer.
+                                </div>
                             </div>
                             <div class="purchase-actions">
                                 <a href="https://www.amazon.com.au/dp/B0HDMKSXN3" target="_blank" class="amazon-link amazon-btn" data-asin="B0HDMKSXN3">Buy Locally ➔</a>
+                                <a href="mailto:contact@boundtext.com?subject=Signed%20Copy%20Request%20-%20Standard%20Operating%20Silence&body=Hi%20Colin,%0A%0AI%20would%20like%20to%20order%20a%20signed%20copy%20of%20Standard%20Operating%20Silence.%20Please%20send%20payment%20details%20for%20direct%20bank%20transfer.%0A%0AThank%20you!" class="signed-btn">Order Signed Copy ✉</a>
                                 <div class="alt-markets-inline">
                                     <span class="alt-market-title">Gifting:</span>
                                     <div class="alt-market-links">
@@ -654,9 +663,6 @@
     </div>
 
     <script>
-        /* ==========================================================
-           AUTOMATIC GEOLOCATION ENGINE FOR MAIN BUTTONS
-        ========================================================== */
         const regionMap = {
             'US': 'com', 'GB': 'co.uk', 'UK': 'co.uk', 'CA': 'ca', 
             'AU': 'com.au', 'DE': 'de', 'FR': 'fr', 'JP': 'co.jp', 
