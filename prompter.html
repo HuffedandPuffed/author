@@ -583,6 +583,26 @@
 
   function startListen(){
     if(!SR){ warn("This browser has no speech recognition. Chrome on Android works; use Fallback scroll in Setup meanwhile."); return; }
+    // Ask for the microphone directly first — this is what raises Chrome's permission
+    // prompt. Speech recognition on its own often fails silently instead of asking.
+    if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+      stateLbl.textContent = "Asking for mic…";
+      navigator.mediaDevices.getUserMedia({ audio:true }).then(function(s){
+        s.getTracks().forEach(function(t){ t.stop(); });
+        reallyListen();
+      }).catch(function(e){
+        paintState();
+        if(e.name === "NotAllowedError") warn("Microphone permission denied (NotAllowedError). Click the icon left of the address bar → Microphone → Allow, then reload. On Windows also check Settings → Privacy → Microphone → let desktop apps use it.");
+        else if(e.name === "NotFoundError") warn("No microphone found (NotFoundError). Plug one in or check it isn't disabled in your system sound settings.");
+        else if(e.name === "NotReadableError") warn("The microphone is busy (NotReadableError) — another app has it open. Close that app and try again.");
+        else warn("Microphone unavailable: " + e.name + " — " + (e.message || "no detail"));
+      });
+      return;
+    }
+    reallyListen();
+  }
+
+  function reallyListen(){
     try{
       rec = new SR();
       rec.continuous = true;
@@ -590,9 +610,17 @@
       rec.lang = navigator.language && /^en/.test(navigator.language) ? navigator.language : "en-GB";
       rec.onresult = onResult;
       rec.onerror = function(e){
-        if(e.error === "not-allowed" || e.error === "service-not-allowed"){
-          warn("Microphone blocked. Allow the mic for this page, then tap Listen again.");
+        if(e.error === "not-allowed"){
+          warn("Chrome refused speech recognition (not-allowed) even though the mic is granted. Reload the page and try once more; if it repeats, an extension or policy is blocking it.");
           stopListen();
+        } else if(e.error === "service-not-allowed"){
+          warn("The speech service is unavailable (service-not-allowed). It needs a connection, and it isn't offered in every region or browser build. Fallback scroll in Setup will drive the text meanwhile.");
+          stopListen();
+        } else if(e.error === "audio-capture"){
+          warn("Lost the microphone (audio-capture). Check nothing else has grabbed it.");
+          stopListen();
+        } else if(e.error === "network"){
+          warn("Speech recognition lost its connection. It runs on Google's servers, so it needs the internet.");
         }
       };
       rec.onend = function(){
