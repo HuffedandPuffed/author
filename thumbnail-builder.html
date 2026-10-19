@@ -1,477 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Thumbnail Builder</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
-            background: #0f0f0f;
-            color: #fff;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1600px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 30px;
-            align-items: start;
-        }
-
-        .controls {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        h1 { font-size: 20px; margin-bottom: 20px; }
-
-        .section {
-            margin-bottom: 25px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #333;
-        }
-        .section:last-child { border-bottom: none; }
-
-        label {
-            font-size: 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #999;
-            display: block;
-            margin-bottom: 8px;
-            letter-spacing: 0.5px;
-        }
-
-        input[type="file"],
-        input[type="text"],
-        input[type="color"],
-        input[type="number"],
-        input[type="range"],
-        select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            background: #0a0a0a;
-            color: #fff;
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        input[type="range"] { padding: 0; height: 6px; margin-bottom: 6px; }
-
-        input[type="file"]::file-selector-button {
-            background: #ff6b35;
-            border: none;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        button {
-            width: 100%;
-            padding: 12px;
-            background: #ff6b35;
-            border: none;
-            color: #fff;
-            border-radius: 4px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.2s;
-        }
-        button:hover { background: #e55a26; }
-        button.secondary { background: #333; margin-top: 4px; }
-        button.secondary:hover { background: #444; }
-
-        .preview-section {
-            background: #1a1a1a;
-            padding: 20px;
-            border-radius: 8px;
-            position: sticky;
-            top: 20px;
-        }
-
-        .preview-title {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #999;
-            margin-bottom: 15px;
-            letter-spacing: 0.5px;
-        }
-
-        #canvasContainer {
-            position: relative;
-            width: 100%;
-            background: #000;
-            border-radius: 4px;
-            overflow: hidden;
-        }
-
-        canvas { display: block; width: 100%; height: auto; touch-action: none; }
-        canvas.has-image { cursor: grab; }
-        canvas.dragging { cursor: grabbing; }
-
-        .text-controls {
-            background: #0a0a0a;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            border-left: 3px solid #ff6b35;
-        }
-
-        .text-controls h3 {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #999;
-            margin-bottom: 12px;
-        }
-
-        .range-display { font-size: 12px; color: #999; margin-bottom: 12px; }
-
-        .button-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .button-group button { margin: 0; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thumbnail Builder – Real Ambulance Calls</title>
+<style>
+  :root { --navy:#001b54; --orange:#ff6b35; --bg:#0f1115; --card:#191c23; --line:#2b303b; --text:#eef1f6; --mute:#9aa3b2; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; background:var(--bg); color:var(--text); padding:16px; }
+  h1 { font-size:22px; margin-bottom:4px; }
+  .sub { color:var(--mute); font-size:13px; margin-bottom:16px; }
+  .app { display:grid; grid-template-columns:minmax(300px,380px) 1fr; gap:16px; max-width:1300px; margin:0 auto; }
+  @media (max-width:820px){ .app{ grid-template-columns:1fr; } }
+  .panel { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px; }
+  .panel + .panel { margin-top:12px; }
+  .panel h2 { font-size:12px; text-transform:uppercase; letter-spacing:.08em; color:var(--mute); margin-bottom:10px; }
+  .row { display:flex; flex-direction:column; gap:4px; margin-bottom:10px; }
+  .row.inline { flex-direction:row; align-items:center; gap:10px; }
+  label { font-size:13px; color:var(--text); display:flex; justify-content:space-between; }
+  label span { color:var(--mute); font-variant-numeric:tabular-nums; }
+  input[type=range] { width:100%; accent-color:var(--orange); }
+  input[type=text], textarea, select { width:100%; padding:9px 10px; border-radius:6px; border:1px solid var(--line); background:#101319; color:var(--text); font:inherit; font-size:14px; }
+  textarea { resize:vertical; min-height:84px; font-weight:700; }
+  input[type=color] { width:44px; height:30px; border:1px solid var(--line); border-radius:6px; background:none; padding:0; }
+  input[type=file] { font-size:13px; color:var(--mute); width:100%; }
+  input[type=file]::file-selector-button { background:var(--orange); color:#fff; border:0; padding:7px 12px; border-radius:6px; font-weight:600; cursor:pointer; margin-right:10px; }
+  .seg { display:flex; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+  .seg button { flex:1; padding:9px 6px; background:#101319; color:var(--mute); border:0; font-size:13px; font-weight:600; cursor:pointer; }
+  .seg button.on { background:var(--orange); color:#fff; }
+  button.act { padding:10px 14px; border:0; border-radius:8px; background:var(--orange); color:#fff; font-weight:700; font-size:14px; cursor:pointer; }
+  button.act.ghost { background:#262b36; color:var(--text); }
+  .stage { display:flex; flex-direction:column; align-items:center; gap:12px; }
+  .canvaswrap { width:100%; display:flex; justify-content:center; background:#000; border-radius:10px; padding:10px; }
+  canvas#main { max-width:100%; max-height:78vh; height:auto; width:auto; touch-action:none; cursor:grab; border-radius:4px; }
+  canvas#main.drag { cursor:grabbing; }
+  .actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+  .feed { display:flex; gap:14px; align-items:flex-end; color:var(--mute); font-size:12px; }
+  .feed canvas { border-radius:4px; background:#000; display:block; }
+  .hint { color:var(--mute); font-size:12px; text-align:center; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="controls">
-            <h1>Thumbnail Builder</h1>
+<h1>Thumbnail Builder</h1>
+<p class="sub">Real Ambulance Calls · drag the picture on the preview to position it · everything is made in your browser, nothing is uploaded</p>
 
-            <div class="section">
-                <label>Format</label>
-                <select id="formatSelect">
-                    <option value="landscape">Landscape (1280x720)</option>
-                    <option value="portrait">Portrait (1080x1920)</option>
-                </select>
-            </div>
+<div class="app">
+  <div class="controls">
 
-            <div class="section">
-                <label>Upload Image</label>
-                <input type="file" id="imageInput" accept="image/*">
-
-                <label>Image Size (%)</label>
-                <input type="range" id="imageScale" min="10" max="300" value="100">
-                <div class="range-display" id="imageScaleDisplay">100%</div>
-
-                <label>Image Left / Right (px)</label>
-                <input type="range" id="imageX" min="-1000" max="1000" value="0">
-                <div class="range-display" id="imageXDisplay">0px</div>
-
-                <label>Image Up / Down (px)</label>
-                <input type="range" id="imageY" min="-1000" max="1000" value="0">
-                <div class="range-display" id="imageYDisplay">0px</div>
-
-                <button type="button" class="secondary" id="resetImage">Reset image position and size</button>
-            </div>
-
-            <div class="section">
-                <label>Blue Panel Color</label>
-                <input type="color" id="panelColor" value="#001a4d">
-
-                <label>Panel Diagonal Position (%)</label>
-                <input type="range" id="panelWidth" min="20" max="50" value="33">
-                <div class="range-display" id="panelWidthDisplay">33%</div>
-
-                <label>Split Line Angle (°)</label>
-                <input type="range" id="lineAngle" min="-45" max="45" value="20">
-                <div class="range-display" id="lineAngleDisplay">20°</div>
-
-                <label>Split Line Color</label>
-                <input type="color" id="lineColor" value="#ff6b35">
-            </div>
-
-            <div class="section">
-                <div class="text-controls">
-                    <h3>Main Title</h3>
-                    <label>Text</label>
-                    <input type="text" id="mainTitle" placeholder="Enter main title">
-
-                    <label>Font</label>
-                    <select id="mainFont"></select>
-
-                    <label>Font Size</label>
-                    <input type="number" id="mainSize" value="54" min="12" max="200">
-
-                    <label>Text Color</label>
-                    <input type="color" id="mainColor" value="#ffffff">
-
-                    <label>Text Block Top (px from top)</label>
-                    <input type="number" id="mainY" value="100" min="0" max="1900">
-                </div>
-
-                <label>Gap Between Title and Subtitle (px)</label>
-                <input type="range" id="textSpacing" min="0" max="200" value="30">
-                <div class="range-display" id="textSpacingDisplay">30px</div>
-
-                <div class="text-controls">
-                    <h3>Subtitle</h3>
-                    <label>Text</label>
-                    <input type="text" id="subTitle" placeholder="Enter subtitle (optional)">
-
-                    <label>Font</label>
-                    <select id="subFont"></select>
-
-                    <label>Font Size</label>
-                    <input type="number" id="subSize" value="36" min="12" max="200">
-
-                    <label>Text Color</label>
-                    <input type="color" id="subColor" value="#ffffff">
-                </div>
-            </div>
-
-            <div class="section">
-                <div class="button-group">
-                    <button onclick="downloadThumbnail('full')">⬇ Download Full Res</button>
-                    <button onclick="downloadThumbnail('preview')">⬇ Download Preview</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="preview-section">
-            <div class="preview-title">Live Preview (drag the image to move it)</div>
-            <div id="canvasContainer">
-                <canvas id="canvas"></canvas>
-            </div>
-        </div>
+    <div class="panel">
+      <h2>1 · Format</h2>
+      <div class="seg" id="fmt">
+        <button data-f="land" class="on">Landscape 1280×720</button>
+        <button data-f="port">Short 1080×1920</button>
+      </div>
     </div>
 
-    <script>
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const $ = id => document.getElementById(id);
+    <div class="panel">
+      <h2>2 · Picture</h2>
+      <div class="row"><input type="file" id="photo" accept="image/*"></div>
+      <div class="row"><label>Size <span id="v_scale">100%</span></label><input type="range" id="scale" min="40" max="250" value="100"></div>
+      <div class="row"><label>Left / right <span id="v_ox">0</span></label><input type="range" id="ox" min="-2500" max="2500" value="0"></div>
+      <div class="row"><label>Up / down <span id="v_oy">0</span></label><input type="range" id="oy" min="-3000" max="3000" value="0"></div>
+      <div class="row inline"><button class="act ghost" id="resetPhoto" type="button">Reset picture</button></div>
+    </div>
 
-        let uploadedImage = null;
-        let currentFormat = 'landscape';
+    <div class="panel">
+      <h2>3 · Words</h2>
+      <div class="row"><label>Big words — one line per row <span>max 3 lines</span></label>
+        <textarea id="lines">WRONG
+PLACE
+TO LAND</textarea></div>
+      <div class="row inline"><input type="checkbox" id="auto" checked> <label for="auto" style="justify-content:flex-start;gap:6px">Fit text size automatically</label></div>
+      <div class="row"><label>Text size <span id="v_size">90</span></label><input type="range" id="size" min="40" max="170" value="90" disabled></div>
+      <div class="row"><label>Text height <span id="v_ty">0</span></label><input type="range" id="ty" min="-200" max="200" value="0"></div>
+      <div class="row"><label>Small label (leave empty to hide)</label><input type="text" id="label" value="REAL AMBULANCE CALLS"></div>
+    </div>
 
-        const LINE_WIDTH = 12;   // orange line thickness
-        const TEXT_PAD = 36;     // gap between text and panel edge / line
-        const LINE_HEIGHT = 1.2; // wrapped line spacing
+    <div class="panel">
+      <h2>4 · Panel</h2>
+      <div class="row" id="r_pos"><label>Panel width <span id="v_pos">42%</span></label><input type="range" id="pos" min="20" max="75" value="42"></div>
+      <div class="row" id="r_ang"><label>Split line angle <span id="v_ang">20°</span></label><input type="range" id="ang" min="0" max="35" value="20"></div>
+      <div class="row" id="r_ptop" style="display:none"><label>Panel top (left side) <span id="v_ptop">1250</span></label><input type="range" id="ptop" min="900" max="1550" value="1250"></div>
+      <div class="row" id="r_rise" style="display:none"><label>Rise to the right <span id="v_rise">190</span></label><input type="range" id="rise" min="0" max="320" value="190"></div>
+      <div class="row inline"><label style="gap:8px">Panel <input type="color" id="navy" value="#001b54"></label><label style="gap:8px">Line <input type="color" id="orange" value="#ff6b35"></label><label style="gap:8px">Text <input type="color" id="tcol" value="#ffffff"></label></div>
+    </div>
 
-        const FONTS = ['Arial', 'Helvetica', 'Impact', 'Verdana', 'Trebuchet MS', 'Tahoma', 'Segoe UI', 'Calibri',
-            'Century Gothic', 'Georgia', 'Times New Roman', 'Palatino', 'Garamond', 'Bookman',
-            'Comic Sans MS', 'Lucida Handwriting', 'Courier New', 'Consolas', 'Lucida Console'];
-        ['mainFont', 'subFont'].forEach(id => {
-            $(id).innerHTML = FONTS.map(f => `<option>${f}</option>`).join('');
+    <div class="panel">
+      <h2>5 · Sticker (optional)</h2>
+      <p class="hint" style="text-align:left;margin-bottom:8px">A transparent PNG, such as the cut padlock. Choose “Move: sticker” to drag it.</p>
+      <div class="row"><input type="file" id="stk" accept="image/png,image/webp,image/*"></div>
+      <div class="row"><label>Sticker size <span id="v_ss">30%</span></label><input type="range" id="ss" min="5" max="100" value="30"></div>
+      <div class="row"><label>Sticker tilt <span id="v_sr">0°</span></label><input type="range" id="sr" min="-45" max="45" value="0"></div>
+      <div class="row inline"><button class="act ghost" id="rmStk" type="button">Remove sticker</button></div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="seg" id="mv" style="width:100%;max-width:420px">
+      <button data-m="photo" class="on">Move: picture</button>
+      <button data-m="stk">Move: sticker</button>
+    </div>
+    <div class="canvaswrap"><canvas id="main"></canvas></div>
+    <div class="actions">
+      <button class="act" id="dl" type="button">Download JPG</button>
+      <button class="act ghost" id="dlpng" type="button">Download PNG</button>
+    </div>
+    <div class="feed">
+      <div>Phone feed size<br><canvas id="mini"></canvas></div>
+      <div>If you can read it here, it works.</div>
+    </div>
+    <p class="hint">YouTube wants JPG or PNG under 2 MB, 1280×720 for videos. Shorts covers are 1080×1920.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var FONT = 'Arial, "Liberation Sans", Helvetica, sans-serif';
+  var $ = function(id){ return document.getElementById(id); };
+  var cv = $('main'), ctx = cv.getContext('2d');
+  var mini = $('mini'), mctx = mini.getContext('2d');
+  var state = { fmt:'land', photo:null, stk:null, ox:0, oy:0, sx:0.5, sy:0.82, move:'photo' };
+
+  function dims(){ return state.fmt === 'land' ? [1280,720] : [1080,1920]; }
+
+  function val(id){ return $(id).value; }
+  function num(id){ return parseFloat($(id).value); }
+
+  function showVals(){
+    $('v_scale').textContent = num('scale') + '%';
+    $('v_ox').textContent = num('ox');
+    $('v_oy').textContent = num('oy');
+    $('v_size').textContent = num('size');
+    $('v_ty').textContent = num('ty');
+    $('v_pos').textContent = num('pos') + '%';
+    $('v_ang').textContent = num('ang') + '°';
+    $('v_ptop').textContent = num('ptop');
+    $('v_rise').textContent = num('rise');
+    $('v_ss').textContent = num('ss') + '%';
+    $('v_sr').textContent = num('sr') + '°';
+  }
+
+  function setFormat(f){
+    state.fmt = f;
+    [].forEach.call($('fmt').children, function(b){ b.classList.toggle('on', b.dataset.f === f); });
+    var land = f === 'land';
+    $('r_pos').style.display = land ? '' : 'none';
+    $('r_ang').style.display = land ? '' : 'none';
+    $('r_ptop').style.display = land ? 'none' : '';
+    $('r_rise').style.display = land ? 'none' : '';
+    resetPhoto();
+    draw();
+  }
+
+  function resetPhoto(){
+    $('scale').value = 100; $('ox').value = 0; $('oy').value = 0;
+    state.ox = 0; state.oy = 0;
+    showVals();
+  }
+
+  // cover-fit placement: landscape pictures sit against the right edge (the panel covers the left),
+  // portrait pictures are centred and pinned to the top
+  function photoRect(){
+    var d = dims(), W = d[0], H = d[1], img = state.photo;
+    var k = Math.max(W / img.width, H / img.height) * (num('scale') / 100);
+    var w = img.width * k, h = img.height * k;
+    var land = state.fmt === 'land';
+    var ox = num('ox'), oy = num('oy');
+    // keep the picture covering the whole frame (no navy gaps) unless it has been shrunk on purpose
+    if (w >= W) ox = land ? Math.max(0, Math.min(w - W, ox)) : Math.max(-(w - W) / 2, Math.min((w - W) / 2, ox));
+    if (h >= H) oy = land ? Math.max(-(h - H) / 2, Math.min((h - H) / 2, oy)) : Math.max(-(h - H), Math.min(0, oy));
+    $('ox').value = ox; $('oy').value = oy;
+    var x = (land ? W - w : (W - w) / 2) + ox;
+    var y = (land ? (H - h) / 2 : 0) + oy;
+    return { x:x, y:y, w:w, h:h };
+  }
+
+  function drawPhoto(){
+    var d = dims(), W = d[0], H = d[1];
+    ctx.fillStyle = val('navy'); ctx.fillRect(0, 0, W, H);
+    if (!state.photo) {
+      var g = ctx.createLinearGradient(0,0,W,H);
+      g.addColorStop(0,'#26324d'); g.addColorStop(1,'#101a33');
+      ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+      ctx.fillStyle = 'rgba(255,255,255,.55)'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.font = 'bold ' + (state.fmt === 'land' ? 36 : 44) + 'px ' + FONT;
+      ctx.fillText('Choose a picture', state.fmt === 'land' ? W * 0.72 : W / 2, state.fmt === 'land' ? H / 2 : 560);
+      return;
+    }
+    var r = photoRect();
+    ctx.drawImage(state.photo, r.x, r.y, r.w, r.h);
+  }
+
+  function panelGeom(){
+    var d = dims(), W = d[0], H = d[1];
+    if (state.fmt === 'land') {
+      var dx = H * Math.tan(num('ang') * Math.PI / 180);
+      var c = num('pos') / 100 * W;
+      return { xt: c - dx / 2, xb: c + dx / 2 };
+    }
+    return { yl: num('ptop'), yr: num('ptop') - num('rise') };
+  }
+
+  function drawPanel(){
+    var d = dims(), W = d[0], H = d[1], g = panelGeom();
+    ctx.fillStyle = val('navy');
+    ctx.beginPath();
+    if (state.fmt === 'land') { ctx.moveTo(0,0); ctx.lineTo(g.xt,0); ctx.lineTo(g.xb,H); ctx.lineTo(0,H); }
+    else { ctx.moveTo(0,g.yl); ctx.lineTo(W,g.yr); ctx.lineTo(W,H); ctx.lineTo(0,H); }
+    ctx.closePath(); ctx.fill();
+    ctx.strokeStyle = val('orange'); ctx.lineCap = 'butt';
+    ctx.lineWidth = state.fmt === 'land' ? 10 : 12;
+    ctx.beginPath();
+    if (state.fmt === 'land') { ctx.moveTo(g.xt,0); ctx.lineTo(g.xb,H); }
+    else { ctx.moveTo(0,g.yl); ctx.lineTo(W,g.yr); }
+    ctx.stroke();
+  }
+
+  function drawText(){
+    var d = dims(), W = d[0], H = d[1], g = panelGeom();
+    var lines = val('lines').split('\n').map(function(s){ return s.trim().toUpperCase(); }).filter(Boolean).slice(0,3);
+    var land = state.fmt === 'land';
+    var left = 36;
+    function edge(y){ return g.xt + (g.xb - g.xt) * y / H; }
+    var top = land ? 90 : g.yl + 55;
+    var bottom = land ? 590 : 1790;
+    var size = num('size');
+    if ($('auto').checked) {
+      size = land ? 130 : 150;
+      while (size > 36) {
+        ctx.font = 'bold ' + size + 'px ' + FONT;
+        var lh = size * 1.08, n = lines.length, y0 = top + (bottom - top - n * lh) / 2 + num('ty'), ok = true;
+        if (n * lh > bottom - top) ok = false;
+        lines.forEach(function(t, i){
+          var w = ctx.measureText(t).width, y = y0 + i * lh;
+          if (land) { if (left + w > edge(y + size * 0.2) - 40) ok = false; }
+          else if (w > W - 110) ok = false;
         });
+        if (ok) break;
+        size -= 2;
+      }
+      $('size').value = size; $('v_size').textContent = size;
+    }
+    ctx.font = 'bold ' + size + 'px ' + FONT;
+    ctx.textBaseline = 'top';
+    var lh2 = size * (land ? 1.08 : 1.1), n2 = lines.length;
+    var y1 = top + (bottom - top - n2 * lh2) / 2 + num('ty');
+    ctx.fillStyle = val('tcol');
+    lines.forEach(function(t, i){
+      var w = ctx.measureText(t).width, x = land ? left : (W - w) / 2, y = y1 + i * lh2;
+      ctx.fillStyle = 'rgba(0,0,0,.47)'; ctx.textAlign = 'left'; ctx.fillText(t, x + 3, y + 3);
+      ctx.fillStyle = val('tcol'); ctx.fillText(t, x, y);
+    });
+    var lab = val('label').trim();
+    if (lab) {
+      ctx.fillStyle = val('orange'); ctx.textAlign = 'left';
+      var ls = land ? 42 : 52;
+      ctx.font = 'bold ' + ls + 'px ' + FONT;
+      var lw = ctx.measureText(lab).width;
+      var lx = land ? left : (W - lw) / 2, ly = land ? 616 : 1815;
+      ctx.fillText(lab, lx, ly);
+    }
+  }
 
-        const SLIDER_UNITS = { panelWidth: '%', lineAngle: '°', imageScale: '%', imageX: 'px', imageY: 'px', textSpacing: 'px' };
+  function drawSticker(){
+    if (!state.stk) return;
+    var d = dims(), W = d[0], H = d[1], s = state.stk;
+    var w = W * num('ss') / 100, h = w * s.height / s.width;
+    ctx.save();
+    ctx.translate(state.sx * W, state.sy * (state.fmt === 'land' ? H : 1250 ));
+    ctx.rotate(num('sr') * Math.PI / 180);
+    ctx.drawImage(s, -w / 2, -h / 2, w, h);
+    ctx.restore();
+  }
 
-        function syncDisplays() {
-            for (const id in SLIDER_UNITS) {
-                $(id + 'Display').textContent = $(id).value + SLIDER_UNITS[id];
-            }
-        }
+  function draw(){
+    var d = dims(); cv.width = d[0]; cv.height = d[1];
+    showVals();
+    drawPhoto(); drawPanel(); drawSticker(); drawText();
+    // phone-feed preview
+    var mw = state.fmt === 'land' ? 168 : 90, mh = state.fmt === 'land' ? 94 : 160;
+    mini.width = mw; mini.height = mh; mctx.drawImage(cv, 0, 0, mw, mh);
+  }
 
-        function updateCanvasDimensions() {
-            if (currentFormat === 'landscape') {
-                canvas.width = 1280; canvas.height = 720;
-            } else {
-                canvas.width = 1080; canvas.height = 1920;
-            }
-            draw();
-        }
+  // ----- dragging -----
+  var drag = null;
+  function pt(e){
+    var r = cv.getBoundingClientRect();
+    return { x:(e.clientX - r.left) * cv.width / r.width, y:(e.clientY - r.top) * cv.height / r.height };
+  }
+  cv.addEventListener('pointerdown', function(e){
+    cv.setPointerCapture(e.pointerId); cv.classList.add('drag');
+    var p = pt(e); drag = { x:p.x, y:p.y, ox:num('ox'), oy:num('oy'), sx:state.sx, sy:state.sy };
+  });
+  cv.addEventListener('pointermove', function(e){
+    if (!drag) return;
+    var p = pt(e), dx = p.x - drag.x, dy = p.y - drag.y;
+    if (state.move === 'photo') {
+      $('ox').value = drag.ox + dx;
+      $('oy').value = drag.oy + dy;
+    } else {
+      var d = dims();
+      state.sx = Math.max(0, Math.min(1, drag.sx + dx / d[0]));
+      state.sy = drag.sy + dy / (state.fmt === 'land' ? d[1] : 1250);
+    }
+    draw();
+  });
+  function endDrag(){ drag = null; cv.classList.remove('drag'); }
+  cv.addEventListener('pointerup', endDrag); cv.addEventListener('pointercancel', endDrag);
 
-        // ---------- Text layout (follows the diagonal edge of the blue panel) ----------
+  // ----- inputs -----
+  function loadImg(file, cb){
+    if (!file) return;
+    var img = new Image(), url = URL.createObjectURL(file);
+    img.onload = function(){ cb(img); draw(); };
+    img.src = url;
+  }
+  $('photo').addEventListener('change', function(e){ loadImg(e.target.files[0], function(i){ state.photo = i; resetPhoto(); }); });
+  $('stk').addEventListener('change', function(e){ loadImg(e.target.files[0], function(i){ state.stk = i; state.sx = 0.82; state.sy = 0.82; }); });
+  $('rmStk').addEventListener('click', function(){ state.stk = null; $('stk').value = ''; draw(); });
+  $('resetPhoto').addEventListener('click', function(){ resetPhoto(); draw(); });
+  $('auto').addEventListener('change', function(){ $('size').disabled = $('auto').checked; draw(); });
+  ['scale','ox','oy','size','ty','pos','ang','ptop','rise','ss','sr','lines','label','navy','orange','tcol'].forEach(function(id){
+    $(id).addEventListener('input', draw);
+  });
+  [].forEach.call($('fmt').children, function(b){ b.addEventListener('click', function(){ setFormat(b.dataset.f); }); });
+  [].forEach.call($('mv').children, function(b){
+    b.addEventListener('click', function(){
+      state.move = b.dataset.m;
+      [].forEach.call($('mv').children, function(x){ x.classList.toggle('on', x === b); });
+    });
+  });
 
-        // X position of the split line at a given Y
-        function lineXAt(y, panelPosition, tanA) {
-            return panelPosition + tanA * (y - canvas.height / 2);
-        }
+  function filename(ext){
+    var first = (val('lines').split('\n')[0] || 'thumbnail').trim().toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'thumbnail';
+    return 'rac-' + (state.fmt === 'land' ? 'video' : 'short') + '-' + first + '.' + ext;
+  }
+  function save(type, ext, q){
+    cv.toBlob(function(b){
+      var a = document.createElement('a');
+      a.href = URL.createObjectURL(b); a.download = filename(ext);
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function(){ URL.revokeObjectURL(a.href); }, 2000);
+    }, type, q);
+  }
+  $('dl').addEventListener('click', function(){ save('image/jpeg', 'jpg', 0.92); });
+  $('dlpng').addEventListener('click', function(){ save('image/png', 'png'); });
 
-        // Wrap text line by line. Each line's available width is measured at its own Y,
-        // so text always stays left of the orange line, and each line is centred in the
-        // space between the canvas edge and the line at that height.
-        function layoutText(text, fontSize, fontFamily, top, panelPosition, tanA) {
-            ctx.font = `bold ${fontSize}px ${fontFamily}`;
-            const lh = fontSize * LINE_HEIGHT;
-            const words = text.trim().split(/\s+/);
-            const lines = [];
-            let y = top, i = 0;
-
-            while (i < words.length) {
-                // narrowest point of the panel across this line's height
-                const edge = Math.min(lineXAt(y, panelPosition, tanA), lineXAt(y + lh, panelPosition, tanA));
-                const left = TEXT_PAD;
-                const right = edge - LINE_WIDTH / 2 - TEXT_PAD;
-                const maxW = Math.max(60, right - left);
-
-                let line = words[i++];
-                while (i < words.length && ctx.measureText(line + ' ' + words[i]).width <= maxW) {
-                    line += ' ' + words[i++];
-                }
-                lines.push({ text: line, y: y, cx: (left + right) / 2 });
-                y += lh;
-            }
-            return { lines, bottom: y };
-        }
-
-        function drawLines(block, fontSize, fontFamily, color) {
-            ctx.font = `bold ${fontSize}px ${fontFamily}`;
-            ctx.fillStyle = color;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top';
-            block.lines.forEach(l => ctx.fillText(l.text, l.cx, l.y));
-        }
-
-        // ---------- Main draw ----------
-
-        function draw() {
-            const W = canvas.width, H = canvas.height;
-            const panelPosition = (parseInt($('panelWidth').value) / 100) * W;
-            const panelColor = $('panelColor').value;
-            const lineColor = $('lineColor').value;
-            const tanA = Math.tan((parseInt($('lineAngle').value) * Math.PI) / 180);
-
-            // 1. Black background
-            ctx.fillStyle = '#000';
-            ctx.fillRect(0, 0, W, H);
-
-            // 2. Image (bottom layer, free to move/scale anywhere on the canvas)
-            if (uploadedImage) {
-                const baseScale = Math.max(W / uploadedImage.width, H / uploadedImage.height);
-                const scale = baseScale * (parseInt($('imageScale').value) / 100);
-                const sw = uploadedImage.width * scale;
-                const sh = uploadedImage.height * scale;
-                const x = (W - sw) / 2 + parseInt($('imageX').value);
-                const y = (H - sh) / 2 + parseInt($('imageY').value);
-                ctx.drawImage(uploadedImage, x, y, sw, sh);
-            }
-
-            // 3. Blue panel (covers the image completely on its side of the line)
-            const topX = lineXAt(0, panelPosition, tanA);
-            const bottomX = lineXAt(H, panelPosition, tanA);
-            ctx.fillStyle = panelColor;
-            ctx.beginPath();
-            ctx.moveTo(0, 0);
-            ctx.lineTo(topX, 0);
-            ctx.lineTo(bottomX, H);
-            ctx.lineTo(0, H);
-            ctx.closePath();
-            ctx.fill();
-
-            // 4. Split line
-            ctx.strokeStyle = lineColor;
-            ctx.lineWidth = LINE_WIDTH;
-            ctx.beginPath();
-            ctx.moveTo(topX, 0);
-            ctx.lineTo(bottomX, H);
-            ctx.stroke();
-
-            // 5. Text (stacked: title block, gap, subtitle block)
-            let nextTop = parseInt($('mainY').value);
-
-            const mainText = $('mainTitle').value;
-            if (mainText.trim()) {
-                const size = parseInt($('mainSize').value);
-                const fam = $('mainFont').value;
-                const block = layoutText(mainText, size, fam, nextTop, panelPosition, tanA);
-                drawLines(block, size, fam, $('mainColor').value);
-                nextTop = block.bottom;
-            }
-
-            const subText = $('subTitle').value;
-            if (subText.trim()) {
-                const size = parseInt($('subSize').value);
-                const fam = $('subFont').value;
-                const top = nextTop + parseInt($('textSpacing').value);
-                const block = layoutText(subText, size, fam, top, panelPosition, tanA);
-                drawLines(block, size, fam, $('subColor').value);
-            }
-        }
-
-        // ---------- Events ----------
-
-        $('imageInput').addEventListener('change', function (e) {
-            if (!e.target.files[0]) return;
-            const reader = new FileReader();
-            reader.onload = function (event) {
-                const img = new Image();
-                img.onload = function () {
-                    uploadedImage = img;
-                    canvas.classList.add('has-image');
-                    draw();
-                };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        });
-
-        $('formatSelect').addEventListener('change', function (e) {
-            currentFormat = e.target.value;
-            updateCanvasDimensions();
-        });
-
-        $('resetImage').addEventListener('click', function () {
-            $('imageScale').value = 100;
-            $('imageX').value = 0;
-            $('imageY').value = 0;
-            syncDisplays();
-            draw();
-        });
-
-        Object.keys(SLIDER_UNITS).forEach(id => {
-            $(id).addEventListener('input', () => { syncDisplays(); draw(); });
-        });
-
-        ['panelColor', 'lineColor', 'mainTitle', 'mainFont', 'mainSize', 'mainColor', 'mainY',
-         'subTitle', 'subFont', 'subSize', 'subColor'].forEach(id => {
-            $(id).addEventListener('input', draw);
-            $(id).addEventListener('change', draw);
-        });
-
-        // Drag the image directly on the preview
-        let drag = null;
-        canvas.addEventListener('pointerdown', e => {
-            if (!uploadedImage) return;
-            drag = { x: e.clientX, y: e.clientY, ix: parseInt($('imageX').value), iy: parseInt($('imageY').value) };
-            canvas.setPointerCapture(e.pointerId);
-            canvas.classList.add('dragging');
-        });
-        canvas.addEventListener('pointermove', e => {
-            if (!drag) return;
-            const k = canvas.width / canvas.getBoundingClientRect().width;
-            const clamp = (v, el) => Math.max(parseInt(el.min), Math.min(parseInt(el.max), Math.round(v)));
-            $('imageX').value = clamp(drag.ix + (e.clientX - drag.x) * k, $('imageX'));
-            $('imageY').value = clamp(drag.iy + (e.clientY - drag.y) * k, $('imageY'));
-            syncDisplays();
-            draw();
-        });
-        const endDrag = () => { drag = null; canvas.classList.remove('dragging'); };
-        canvas.addEventListener('pointerup', endDrag);
-        canvas.addEventListener('pointercancel', endDrag);
-
-        function downloadThumbnail(quality) {
-            const filename = currentFormat === 'landscape'
-                ? `thumbnail-${quality}.png`
-                : `thumbnail-portrait-${quality}.png`;
-
-            let exportCanvas = canvas;
-            if (quality === 'preview') {
-                exportCanvas = document.createElement('canvas');
-                exportCanvas.width = canvas.width / 2;
-                exportCanvas.height = canvas.height / 2;
-                exportCanvas.getContext('2d').drawImage(canvas, 0, 0, exportCanvas.width, exportCanvas.height);
-            }
-
-            const link = document.createElement('a');
-            link.href = exportCanvas.toDataURL('image/png');
-            link.download = filename;
-            link.click();
-        }
-
-        syncDisplays();
-        updateCanvasDimensions();
-    </script>
+  draw();
+})();
+</script>
 </body>
 </html>
